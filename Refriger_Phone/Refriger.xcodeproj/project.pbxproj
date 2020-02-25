@@ -1,0 +1,585 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		052064ECC6A3CBB86FFC6DAF /* Pods_Refriger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CE523BB0000EC9166EC858 /* Pods_Refriger.framework */; };
+		5D244ADC2403864B0067E47D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D244ADB2403864B0067E47D /* GoogleService-Info.plist */; };
+		5D57F40923F93CFA00901F55 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 5D57F40823F93CFA00901F55 /* CodeScanner */; };
+		5D57F40B23F9601B00901F55 /* ShowAllFoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D57F40A23F9601B00901F55 /* ShowAllFoods.swift */; };
+		5D57F40D23F9628B00901F55 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D57F40C23F9628B00901F55 /* SearchBar.swift */; };
+		5D57F40F23FBB5B000901F55 /* Food+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D57F40E23FBB5B000901F55 /* Food+Extensions.swift */; };
+		5D57F41423FC4CF100901F55 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D57F41323FC4CF100901F55 /* NotificationManager.swift */; };
+		5D57F41823FE6D3100901F55 /* Select+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D57F41723FE6D3100901F55 /* Select+Extensions.swift */; };
+		5D5927A423EC77BB002E1FCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927A323EC77BB002E1FCC /* AppDelegate.swift */; };
+		5D5927A623EC77BB002E1FCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927A523EC77BB002E1FCC /* SceneDelegate.swift */; };
+		5D5927A923EC77BB002E1FCC /* Refriger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927A723EC77BB002E1FCC /* Refriger.xcdatamodeld */; };
+		5D5927AD23EC77BD002E1FCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D5927AC23EC77BD002E1FCC /* Assets.xcassets */; };
+		5D5927B023EC77BD002E1FCC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D5927AF23EC77BD002E1FCC /* Preview Assets.xcassets */; };
+		5D5927B323EC77BD002E1FCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D5927B123EC77BD002E1FCC /* LaunchScreen.storyboard */; };
+		5D5927C823EC7930002E1FCC /* SelectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927C723EC7930002E1FCC /* SelectList.swift */; };
+		5D5927CC23EC7A1A002E1FCC /* AccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927CB23EC7A1A002E1FCC /* AccountInfo.swift */; };
+		5D5927D023EC7A4E002E1FCC /* CreateAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927CF23EC7A4E002E1FCC /* CreateAccount.swift */; };
+		5D5927D423EC7AAF002E1FCC /* FindAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927D323EC7AAF002E1FCC /* FindAccount.swift */; };
+		5D5927D723EC7B86002E1FCC /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927D623EC7B86002E1FCC /* FoodCell.swift */; };
+		5D5927D923EC7B8E002E1FCC /* FoodInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927D823EC7B8E002E1FCC /* FoodInfo.swift */; };
+		5D5927DB23EC7B94002E1FCC /* FoodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927DA23EC7B94002E1FCC /* FoodType.swift */; };
+		5D5927DD23EC7B9A002E1FCC /* IsNotLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927DC23EC7B9A002E1FCC /* IsNotLogin.swift */; };
+		5D5927DF23EC7B9E002E1FCC /* Mart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927DE23EC7B9E002E1FCC /* Mart.swift */; };
+		5D5927E123EC7BA1002E1FCC /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927E023EC7BA1002E1FCC /* PurchaseView.swift */; };
+		5D5927E923EC85F1002E1FCC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927E823EC85F1002E1FCC /* ContentView.swift */; };
+		5D5927EB23EC861F002E1FCC /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927EA23EC861F002E1FCC /* SessionStore.swift */; };
+		5D5927ED23EC8692002E1FCC /* SelfAddFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927EC23EC8692002E1FCC /* SelfAddFood.swift */; };
+		5D5927EF23EC86C0002E1FCC /* RefrigerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927EE23EC86C0002E1FCC /* RefrigerList.swift */; };
+		5D5927F123EC8BF0002E1FCC /* RefrigerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927F023EC8BF0002E1FCC /* RefrigerData.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5D244AD824008F820067E47D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		23B9BD7D35EF2E19A6207B44 /* Pods-Refriger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refriger.debug.xcconfig"; path = "Target Support Files/Pods-Refriger/Pods-Refriger.debug.xcconfig"; sourceTree = "<group>"; };
+		5D244ADB2403864B0067E47D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../냉장고 앱 식품목록/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5D57F40A23F9601B00901F55 /* ShowAllFoods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllFoods.swift; sourceTree = "<group>"; };
+		5D57F40C23F9628B00901F55 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		5D57F40E23FBB5B000901F55 /* Food+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+Extensions.swift"; sourceTree = "<group>"; };
+		5D57F41323FC4CF100901F55 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		5D57F41723FE6D3100901F55 /* Select+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Select+Extensions.swift"; sourceTree = "<group>"; };
+		5D5927A023EC77BB002E1FCC /* Refriger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Refriger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D5927A323EC77BB002E1FCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5D5927A523EC77BB002E1FCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		5D5927A823EC77BB002E1FCC /* Refriger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Refriger.xcdatamodel; sourceTree = "<group>"; };
+		5D5927AC23EC77BD002E1FCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5D5927AF23EC77BD002E1FCC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5D5927B223EC77BD002E1FCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5D5927B423EC77BD002E1FCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5D5927C723EC7930002E1FCC /* SelectList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectList.swift; sourceTree = "<group>"; };
+		5D5927CB23EC7A1A002E1FCC /* AccountInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfo.swift; sourceTree = "<group>"; };
+		5D5927CF23EC7A4E002E1FCC /* CreateAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccount.swift; sourceTree = "<group>"; };
+		5D5927D323EC7AAF002E1FCC /* FindAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindAccount.swift; sourceTree = "<group>"; };
+		5D5927D623EC7B86002E1FCC /* FoodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
+		5D5927D823EC7B8E002E1FCC /* FoodInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodInfo.swift; sourceTree = "<group>"; };
+		5D5927DA23EC7B94002E1FCC /* FoodType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodType.swift; sourceTree = "<group>"; };
+		5D5927DC23EC7B9A002E1FCC /* IsNotLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsNotLogin.swift; sourceTree = "<group>"; };
+		5D5927DE23EC7B9E002E1FCC /* Mart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mart.swift; sourceTree = "<group>"; };
+		5D5927E023EC7BA1002E1FCC /* PurchaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
+		5D5927E823EC85F1002E1FCC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5D5927EA23EC861F002E1FCC /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
+		5D5927EC23EC8692002E1FCC /* SelfAddFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfAddFood.swift; sourceTree = "<group>"; };
+		5D5927EE23EC86C0002E1FCC /* RefrigerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefrigerList.swift; sourceTree = "<group>"; };
+		5D5927F023EC8BF0002E1FCC /* RefrigerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefrigerData.swift; sourceTree = "<group>"; };
+		5DCB26A923F1B6B000C67C1D /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		63CE523BB0000EC9166EC858 /* Pods_Refriger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refriger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F59FC388224A61B1D5A1AA62 /* Pods-Refriger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refriger.release.xcconfig"; path = "Target Support Files/Pods-Refriger/Pods-Refriger.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5D59279D23EC77BB002E1FCC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D57F40923F93CFA00901F55 /* CodeScanner in Frameworks */,
+				052064ECC6A3CBB86FFC6DAF /* Pods_Refriger.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5D59279723EC77BB002E1FCC = {
+			isa = PBXGroup;
+			children = (
+				5D57F41723FE6D3100901F55 /* Select+Extensions.swift */,
+				5D57F40E23FBB5B000901F55 /* Food+Extensions.swift */,
+				5D57F41323FC4CF100901F55 /* NotificationManager.swift */,
+				5D5927F023EC8BF0002E1FCC /* RefrigerData.swift */,
+				5D5927E823EC85F1002E1FCC /* ContentView.swift */,
+				5D5927EA23EC861F002E1FCC /* SessionStore.swift */,
+				5D5927A223EC77BB002E1FCC /* Refriger */,
+				5D5927E523EC7C1D002E1FCC /* Account */,
+				5D5927E423EC7BDA002E1FCC /* Mart */,
+				5D5927A123EC77BB002E1FCC /* Products */,
+				F2C4C916256C3819A6FB3245 /* Pods */,
+				81DAA69C259710F6A37253B2 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5D5927A123EC77BB002E1FCC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5D5927A023EC77BB002E1FCC /* Refriger.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5D5927A223EC77BB002E1FCC /* Refriger */ = {
+			isa = PBXGroup;
+			children = (
+				5D5927EE23EC86C0002E1FCC /* RefrigerList.swift */,
+				5D5927EC23EC8692002E1FCC /* SelfAddFood.swift */,
+				5D5927A523EC77BB002E1FCC /* SceneDelegate.swift */,
+				5D5927A323EC77BB002E1FCC /* AppDelegate.swift */,
+				5D57F40A23F9601B00901F55 /* ShowAllFoods.swift */,
+				5D5927AC23EC77BD002E1FCC /* Assets.xcassets */,
+				5D5927B123EC77BD002E1FCC /* LaunchScreen.storyboard */,
+				5D244ADB2403864B0067E47D /* GoogleService-Info.plist */,
+				5D5927B423EC77BD002E1FCC /* Info.plist */,
+				5D5927A723EC77BB002E1FCC /* Refriger.xcdatamodeld */,
+				5D5927AE23EC77BD002E1FCC /* Preview Content */,
+			);
+			path = Refriger;
+			sourceTree = "<group>";
+		};
+		5D5927AE23EC77BD002E1FCC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				5D5927AF23EC77BD002E1FCC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5D5927E423EC7BDA002E1FCC /* Mart */ = {
+			isa = PBXGroup;
+			children = (
+				5D5927DE23EC7B9E002E1FCC /* Mart.swift */,
+				5D5927D623EC7B86002E1FCC /* FoodCell.swift */,
+				5D5927D823EC7B8E002E1FCC /* FoodInfo.swift */,
+				5D57F40C23F9628B00901F55 /* SearchBar.swift */,
+				5D5927DA23EC7B94002E1FCC /* FoodType.swift */,
+				5D5927C723EC7930002E1FCC /* SelectList.swift */,
+				5D5927E023EC7BA1002E1FCC /* PurchaseView.swift */,
+			);
+			path = Mart;
+			sourceTree = "<group>";
+		};
+		5D5927E523EC7C1D002E1FCC /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				5D5927CB23EC7A1A002E1FCC /* AccountInfo.swift */,
+				5D5927DC23EC7B9A002E1FCC /* IsNotLogin.swift */,
+				5D5927CF23EC7A4E002E1FCC /* CreateAccount.swift */,
+				5D5927D323EC7AAF002E1FCC /* FindAccount.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		81DAA69C259710F6A37253B2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				63CE523BB0000EC9166EC858 /* Pods_Refriger.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F2C4C916256C3819A6FB3245 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				23B9BD7D35EF2E19A6207B44 /* Pods-Refriger.debug.xcconfig */,
+				F59FC388224A61B1D5A1AA62 /* Pods-Refriger.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5D59279F23EC77BB002E1FCC /* Refriger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D5927B723EC77BD002E1FCC /* Build configuration list for PBXNativeTarget "Refriger" */;
+			buildPhases = (
+				85B2E568028D124DAABFD046 /* [CP] Check Pods Manifest.lock */,
+				5D59279C23EC77BB002E1FCC /* Sources */,
+				5D59279D23EC77BB002E1FCC /* Frameworks */,
+				5D59279E23EC77BB002E1FCC /* Resources */,
+				D93EF9FDD47C53C38CE24956 /* [CP] Embed Pods Frameworks */,
+				5D244AD824008F820067E47D /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Refriger;
+			packageProductDependencies = (
+				5D57F40823F93CFA00901F55 /* CodeScanner */,
+			);
+			productName = Refriger;
+			productReference = 5D5927A023EC77BB002E1FCC /* Refriger.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5D59279823EC77BB002E1FCC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "조종운";
+				TargetAttributes = {
+					5D59279F23EC77BB002E1FCC = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 5D59279B23EC77BB002E1FCC /* Build configuration list for PBXProject "Refriger" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ko,
+			);
+			mainGroup = 5D59279723EC77BB002E1FCC;
+			packageReferences = (
+				5D57F40723F93CFA00901F55 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				5D57F41023FC332500901F55 /* XCRemoteSwiftPackageReference "QGrid" */,
+			);
+			productRefGroup = 5D5927A123EC77BB002E1FCC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5D59279F23EC77BB002E1FCC /* Refriger */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5D59279E23EC77BB002E1FCC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D5927B323EC77BD002E1FCC /* LaunchScreen.storyboard in Resources */,
+				5D244ADC2403864B0067E47D /* GoogleService-Info.plist in Resources */,
+				5D5927B023EC77BD002E1FCC /* Preview Assets.xcassets in Resources */,
+				5D5927AD23EC77BD002E1FCC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		85B2E568028D124DAABFD046 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Refriger-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D93EF9FDD47C53C38CE24956 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Refriger/Pods-Refriger-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Refriger/Pods-Refriger-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Refriger/Pods-Refriger-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5D59279C23EC77BB002E1FCC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D5927EB23EC861F002E1FCC /* SessionStore.swift in Sources */,
+				5D5927E123EC7BA1002E1FCC /* PurchaseView.swift in Sources */,
+				5D5927A423EC77BB002E1FCC /* AppDelegate.swift in Sources */,
+				5D5927F123EC8BF0002E1FCC /* RefrigerData.swift in Sources */,
+				5D5927D923EC7B8E002E1FCC /* FoodInfo.swift in Sources */,
+				5D5927D723EC7B86002E1FCC /* FoodCell.swift in Sources */,
+				5D5927D423EC7AAF002E1FCC /* FindAccount.swift in Sources */,
+				5D57F40F23FBB5B000901F55 /* Food+Extensions.swift in Sources */,
+				5D5927DB23EC7B94002E1FCC /* FoodType.swift in Sources */,
+				5D5927EF23EC86C0002E1FCC /* RefrigerList.swift in Sources */,
+				5D5927DF23EC7B9E002E1FCC /* Mart.swift in Sources */,
+				5D5927D023EC7A4E002E1FCC /* CreateAccount.swift in Sources */,
+				5D5927DD23EC7B9A002E1FCC /* IsNotLogin.swift in Sources */,
+				5D57F41823FE6D3100901F55 /* Select+Extensions.swift in Sources */,
+				5D5927E923EC85F1002E1FCC /* ContentView.swift in Sources */,
+				5D57F40B23F9601B00901F55 /* ShowAllFoods.swift in Sources */,
+				5D5927ED23EC8692002E1FCC /* SelfAddFood.swift in Sources */,
+				5D57F40D23F9628B00901F55 /* SearchBar.swift in Sources */,
+				5D5927C823EC7930002E1FCC /* SelectList.swift in Sources */,
+				5D5927CC23EC7A1A002E1FCC /* AccountInfo.swift in Sources */,
+				5D5927A923EC77BB002E1FCC /* Refriger.xcdatamodeld in Sources */,
+				5D5927A623EC77BB002E1FCC /* SceneDelegate.swift in Sources */,
+				5D57F41423FC4CF100901F55 /* NotificationManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5D5927B123EC77BD002E1FCC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5D5927B223EC77BD002E1FCC /* Base */,
+				5DCB26A923F1B6B000C67C1D /* ko */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5D5927B523EC77BD002E1FCC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5D5927B623EC77BD002E1FCC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5D5927B823EC77BD002E1FCC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23B9BD7D35EF2E19A6207B44 /* Pods-Refriger.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Refriger/Preview Content\"";
+				DEVELOPMENT_TEAM = 8TC4W5JV38;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Refriger/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cho.Refriger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		5D5927B923EC77BD002E1FCC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F59FC388224A61B1D5A1AA62 /* Pods-Refriger.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Refriger/Preview Content\"";
+				DEVELOPMENT_TEAM = 8TC4W5JV38;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Refriger/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cho.Refriger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5D59279B23EC77BB002E1FCC /* Build configuration list for PBXProject "Refriger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D5927B523EC77BD002E1FCC /* Debug */,
+				5D5927B623EC77BD002E1FCC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5D5927B723EC77BD002E1FCC /* Build configuration list for PBXNativeTarget "Refriger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D5927B823EC77BD002E1FCC /* Debug */,
+				5D5927B923EC77BD002E1FCC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5D57F40723F93CFA00901F55 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
+		5D57F41023FC332500901F55 /* XCRemoteSwiftPackageReference "QGrid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Q-Mobile/QGrid";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5D57F40823F93CFA00901F55 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D57F40723F93CFA00901F55 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		5D5927A723EC77BB002E1FCC /* Refriger.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5D5927A823EC77BB002E1FCC /* Refriger.xcdatamodel */,
+			);
+			currentVersion = 5D5927A823EC77BB002E1FCC /* Refriger.xcdatamodel */;
+			path = Refriger.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 5D59279823EC77BB002E1FCC /* Project object */;
+}

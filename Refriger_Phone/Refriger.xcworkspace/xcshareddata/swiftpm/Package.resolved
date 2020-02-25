@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CodeScanner",
+        "repositoryURL": "https://github.com/twostraws/CodeScanner.git",
+        "state": {
+          "branch": null,
+          "revision": "ccaabda42e331147d163fb91130088e98e5da347",
+          "version": "1.0.2"
+        }
+      },
+      {
+        "package": "QGrid",
+        "repositoryURL": "https://github.com/Q-Mobile/QGrid",
+        "state": {
+          "branch": null,
+          "revision": "40607aec336a8097c94bcadb81762592d89073ac",
+          "version": "0.1.3"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
