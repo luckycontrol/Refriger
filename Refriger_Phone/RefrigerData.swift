@@ -11,7 +11,8 @@ import SwiftUI
 
 class ViewDatas: ObservableObject {
     
-    @Published var login: Bool = true
+    @Published var name: String = "회원"
+    @Published var login: Bool = false
     
     @Published var category: String = "과일"
     @Published var foodName: String = "딸기 / 블루베리"

@@ -7,28 +7,20 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestoreSwift
 
 struct IsNotLogin: View {
     
     @EnvironmentObject var session: SessionStore
     
-    @Binding var login: Bool
+    @ObservedObject var viewDatas: ViewDatas
     
     @State var email: String = ""
     @State var password: String = ""
     @State var error: String = ""
     
-    func signIn() {
-        session.signIn(email: email, password: password) { (result, error) in
-            if error == nil {
-                self.email = ""
-                self.password = ""
-                self.login = true
-            } else {
-                self.error = "입력하신 계정이 올바르지 않습니다."
-            }
-        }
-    }
+    let db = Firestore.firestore().collection("users")
     
     var body: some View {
         
@@ -75,7 +67,7 @@ struct IsNotLogin: View {
             
             Spacer()
             
-            NavigationLink(destination: CreateAccount()) {
+            NavigationLink(destination: CreateAccount(viewDatas: viewDatas)) {
                 
                 HStack(spacing: 10) {
                     
@@ -89,6 +81,32 @@ struct IsNotLogin: View {
             
         }
         .padding(.top, 40)
+    }
+    
+    func signIn() {
+        let mail = self.email
+        session.signIn(email: email, password: password) { (result, error) in
+            if error == nil {
+                self.db.getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error : \(err)")
+                    } else {
+                        // 로그인 성공
+                        for document in querySnapshot!.documents {
+                            if String(describing: document.data()["email"]!) == mail {
+                                self.viewDatas.name = String(describing: document.data()["name"]!)
+                                self.email = ""
+                                self.password = ""
+                                self.viewDatas.login = true
+                                break
+                            }
+                        }
+                    }
+                }
+            } else {
+                self.error = "입력하신 계정이 올바르지 않습니다."
+            }
+        }
     }
     
     func checkAccount(id: String, pass: String) {

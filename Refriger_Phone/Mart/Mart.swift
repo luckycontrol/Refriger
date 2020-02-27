@@ -71,7 +71,7 @@ struct UpperView: View {
             .background(Color.black.opacity(self.sideBar ? 0.5 : 0))
             
         }
-        .navigationBarItems(leading: LeftNav(sideBar: $sideBar), trailing: RightNav(login: $viewDatas.login))
+        .navigationBarItems(leading: LeftNav(sideBar: $sideBar), trailing: RightNav(viewDatas: viewDatas))
         .navigationBarTitle("Cho Mart", displayMode: .inline)
         .sheet(isPresented: $sorting) { SortingView() }
         
@@ -109,13 +109,13 @@ struct LeftNav: View {
 
 struct RightNav: View {
     
-    @Binding var login: Bool
+    @ObservedObject var viewDatas: ViewDatas
     
     var body: some View {
         
         HStack(spacing: 20) {
             
-            NavigationLink(destination: SelectList(login: $login)) {
+            NavigationLink(destination: SelectList(viewDatas: viewDatas)) {
                 
                 Image(systemName: "cart")
                     .resizable()
@@ -216,7 +216,7 @@ struct SideUserMenu: View {
             Divider().background(Color.gray).padding(.horizontal, 10)
             
             HStack {
-                NavigationLink(destination: SelectList(login: $viewDatas.login)) {
+                NavigationLink(destination: SelectList(viewDatas: viewDatas)) {
                     HStack(spacing: 15) {
                         Image(systemName: "cart")
                             .resizable().frame(width: 20, height: 20)
@@ -262,7 +262,7 @@ struct SideUserInfo: View {
                 Text("유저 정보")
             }
             else {
-                IsNotLogin(login: $viewDatas.login)
+                IsNotLogin(viewDatas: viewDatas)
             }
         }
     }

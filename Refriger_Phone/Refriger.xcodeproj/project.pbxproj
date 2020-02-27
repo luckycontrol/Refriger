@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		052064ECC6A3CBB86FFC6DAF /* Pods_Refriger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CE523BB0000EC9166EC858 /* Pods_Refriger.framework */; };
-		5D244ADC2403864B0067E47D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D244ADB2403864B0067E47D /* GoogleService-Info.plist */; };
+		5D0D0E75240632B4004BB30C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D0D0E74240632B4004BB30C /* GoogleService-Info.plist */; };
 		5D57F40923F93CFA00901F55 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 5D57F40823F93CFA00901F55 /* CodeScanner */; };
 		5D57F40B23F9601B00901F55 /* ShowAllFoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D57F40A23F9601B00901F55 /* ShowAllFoods.swift */; };
 		5D57F40D23F9628B00901F55 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D57F40C23F9628B00901F55 /* SearchBar.swift */; };
@@ -53,7 +53,7 @@
 
 /* Begin PBXFileReference section */
 		23B9BD7D35EF2E19A6207B44 /* Pods-Refriger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refriger.debug.xcconfig"; path = "Target Support Files/Pods-Refriger/Pods-Refriger.debug.xcconfig"; sourceTree = "<group>"; };
-		5D244ADB2403864B0067E47D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../냉장고 앱 식품목록/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5D0D0E74240632B4004BB30C /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		5D57F40A23F9601B00901F55 /* ShowAllFoods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllFoods.swift; sourceTree = "<group>"; };
 		5D57F40C23F9628B00901F55 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		5D57F40E23FBB5B000901F55 /* Food+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+Extensions.swift"; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 				5D57F40A23F9601B00901F55 /* ShowAllFoods.swift */,
 				5D5927AC23EC77BD002E1FCC /* Assets.xcassets */,
 				5D5927B123EC77BD002E1FCC /* LaunchScreen.storyboard */,
-				5D244ADB2403864B0067E47D /* GoogleService-Info.plist */,
+				5D0D0E74240632B4004BB30C /* GoogleService-Info.plist */,
 				5D5927B423EC77BD002E1FCC /* Info.plist */,
 				5D5927A723EC77BB002E1FCC /* Refriger.xcdatamodeld */,
 				5D5927AE23EC77BD002E1FCC /* Preview Content */,
@@ -264,7 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D5927B323EC77BD002E1FCC /* LaunchScreen.storyboard in Resources */,
-				5D244ADC2403864B0067E47D /* GoogleService-Info.plist in Resources */,
+				5D0D0E75240632B4004BB30C /* GoogleService-Info.plist in Resources */,
 				5D5927B023EC77BD002E1FCC /* Preview Assets.xcassets in Resources */,
 				5D5927AD23EC77BD002E1FCC /* Assets.xcassets in Resources */,
 			);

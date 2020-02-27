@@ -109,7 +109,7 @@ struct FoodInfo: View {
                 
                 AddCartButton(viewDatas: viewDatas, alert: $alert, activeAlert: $activeAlert, foodName: name, foodCount: String(count), foodPrice: price)
 
-                NavigationLink(destination: SelectList(login: $viewDatas.login)) {
+                NavigationLink(destination: SelectList(viewDatas: viewDatas)) {
                     
                     HStack {
                         Text("구매하기")
@@ -204,7 +204,7 @@ struct AddCartButton: View {
                     .border(Color.gray, width: 5)
                 }.clipShape(RoundedRectangle(cornerRadius: 5))
             } else {
-                NavigationLink(destination: SelectList(login: $viewDatas.login)) {
+                NavigationLink(destination: SelectList(viewDatas: viewDatas)) {
                     HStack {
                         Text("장바구니 추가")
                             .foregroundColor(.gray)

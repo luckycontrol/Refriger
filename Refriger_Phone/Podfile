@@ -13,5 +13,8 @@ target 'Refriger' do
   pod 'Firebase/Database'
   pod 'Firebase/MLVision'
   pod 'Firebase/MLVisionBarcodeModel'
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
 
 end

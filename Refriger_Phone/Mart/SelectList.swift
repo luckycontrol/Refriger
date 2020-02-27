@@ -9,10 +9,11 @@
 // 장바구니 리스트
 import SwiftUI
 import Firebase
+import FirebaseFirestoreSwift
 
 struct SelectList: View {
     
-    @Binding var login: Bool
+    @ObservedObject var viewDatas: ViewDatas
     
     @State var edit: Bool = false
     
@@ -23,6 +24,23 @@ struct SelectList: View {
     ) var selectList: FetchedResults<Select>
     
     @Environment(\.managedObjectContext) var context
+    
+    // 사용자의 장바구니목록을 firestore에서 가져옴
+    var selectionList: [String : Any] {
+        let db = Firestore.firestore().collection("selectionList")
+        db.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error : \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    if String(describing: document.data()["userName"]!) == self.viewDatas.name {
+                        let d = document.data()
+                        return d
+                    }
+                }
+            }
+        }
+    }
     
     var totalPrice: Int {
         var p: Int = 0
@@ -36,14 +54,14 @@ struct SelectList: View {
         
         Group {
             
-            if login {
+            if viewDatas.login {
                 
                 VStack {
                     // 장바구니에 추가한 내역이 있을 때
                     if selectList.count > 0 {
                         ScrollView(.vertical, showsIndicators: false) {
                             HStack {
-                                Text("회원님의 장바구니 내역입니다.")
+                                Text("\(viewDatas.name) 님의 장바구니 내역입니다.")
                                 .font(.system(size: 22, weight: .semibold))
                                 .padding([.top, .bottom], 20)
                                 Spacer()
@@ -99,7 +117,7 @@ struct SelectList: View {
             }
             
             else {
-                IsNotLogin(login: $login)
+                IsNotLogin(viewDatas: viewDatas)
             }
         }
         

@@ -7,27 +7,23 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestoreSwift
 
 struct CreateAccount: View {
     
     @EnvironmentObject var session: SessionStore
+    let db = Firestore.firestore().collection("users")
     
+    @ObservedObject var viewDatas: ViewDatas
+    
+    @State var name: String = ""
     @State var email: String = ""
     @State var password: String = ""
     @State var checkPassword: String = ""
     
+    @State var check: Bool = false
     @State var error: String = ""
-    
-    func signUp() {
-        session.signUp(email: email, password: password) { (result, error) in
-            if error == nil {
-                self.email = ""
-                self.password = ""
-            } else {
-                self.error = "이미 해당 이메일이 존재합니다."
-            }
-        }
-    }
     
     var body: some View {
         
@@ -45,15 +41,17 @@ struct CreateAccount: View {
             
             VStack(spacing: 20) {
                 
+                InputBox(secure: false, image: "person.fill", placeholder: "이름을 입력하세요.", text: $name)
+                
                 InputBox(secure: false, image: "envelope", placeholder: "이메일을 입력하세요.", text: $email)
                 
-                InputBox(secure: true, image: "lock.fill", placeholder: "비밀번호를 입력하세요.", text: $password)
+                InputBox(secure: true, image: "lock.fill", placeholder: "비밀번호를 입력하세요. (최소 6자 이상)", text: $password)
                 
                 InputBox(secure: true, image: "lock.fill", placeholder: "비밀번호를 다시 입력하세요.", text: $checkPassword)
                 
-                Text(error)
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(.red)
+                Text(check ? "계정이 생성되었습니다." : error)
+                    .foregroundColor(check ? .blue : .red)
+                    .font(.system(size: 15, weight: .semibold))
             }
             .padding(.horizontal, 50)
             .padding(.top, 80)
@@ -73,7 +71,32 @@ struct CreateAccount: View {
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 .shadow(radius: 5)
             }.padding(.bottom, 50)
-            
+        }
+    }
+    
+    func signUp() {
+        session.signUp(email: email, password: password) { (result, error) in
+            if error == nil {
+                self.db.addDocument(data: [
+                    "email" : self.email,
+                    "name" : self.name
+                ]) { err in
+                    if let err = err { print("Error: \(err)")}
+                    else {
+                        print("저장완료")
+                        self.check = true
+                        self.viewDatas.name = self.name
+                        
+                        self.email = ""
+                        self.password = ""
+                        self.checkPassword = ""
+                        self.name = ""
+                    }
+                }
+            } else {
+                print(error!)
+                self.error = "이미 해당 이메일이 존재합니다."
+            }
         }
     }
     
@@ -83,6 +106,11 @@ struct CreateAccount: View {
         
         if email == "" || pass == "" || rePass == "" {
             self.error = "다시 기입해주세요!"
+            return
+        }
+        
+        if pass.count < 6 {
+            self.error = "비밀번호는 최소 6자 이상이어야 합니다."
             return
         }
         
@@ -107,3 +135,4 @@ struct CreateAccount: View {
         signUp()
     }
 }
+
