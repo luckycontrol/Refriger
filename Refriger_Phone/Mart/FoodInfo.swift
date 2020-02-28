@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import FirebaseFirestoreSwift
+import Firebase
 
 struct FoodInfo: View {
     
@@ -180,6 +182,8 @@ struct AddCartButton: View {
                   sortDescriptors: [NSSortDescriptor(keyPath: \Select.id, ascending: false)]
     ) var selectList: FetchedResults<Select>
     
+    let db = Firestore.firestore().collection("selectionList")
+    
     var body: some View {
         
         Group {
@@ -220,12 +224,24 @@ struct AddCartButton: View {
     func checkDuplicate(foodName: String) -> Bool {
         // true면 중복 false면 중복 아님
         var duplicate: Bool = false
+        var foodNames: [String] = []
+        var selectionList: [String : Any] = [:]
         
-        for c in selectList {
-            if c.foodName == foodName {
-                duplicate = true
+        db.getDocuments() { (querySnapshot, err) in
+            for document in querySnapshot!.documents {
+                if String(describing: document.data()["name"]) == self.viewDatas.name {
+                    selectionList = document.data()
+                }
             }
         }
+        // 콤마를 분리해서 각 음식 이름 배열 만들기
+        foodNames = String(describing: selectionList["foodName"]).components(separatedBy: ",")
+        
+        // 배열에서 음식이름 찾기. 추가하고자 하는 음식이름이 배열 내에 있으면 중복.
+        for name in foodNames {
+            if self.foodName == name { duplicate = true }
+        }
+        
         return duplicate
     }
     

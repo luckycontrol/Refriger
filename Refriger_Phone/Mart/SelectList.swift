@@ -26,21 +26,6 @@ struct SelectList: View {
     @Environment(\.managedObjectContext) var context
     
     // 사용자의 장바구니목록을 firestore에서 가져옴
-    var selectionList: [String : Any] {
-        let db = Firestore.firestore().collection("selectionList")
-        db.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error : \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    if String(describing: document.data()["userName"]!) == self.viewDatas.name {
-                        let d = document.data()
-                        return d
-                    }
-                }
-            }
-        }
-    }
     
     var totalPrice: Int {
         var p: Int = 0
