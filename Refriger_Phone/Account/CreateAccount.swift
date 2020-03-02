@@ -77,22 +77,20 @@ struct CreateAccount: View {
     func signUp() {
         session.signUp(email: email, password: password) { (result, error) in
             if error == nil {
-                self.db.addDocument(data: [
-                    "email" : self.email,
-                    "name" : self.name
-                ]) { err in
-                    if let err = err { print("Error: \(err)")}
-                    else {
-                        print("저장완료")
-                        self.check = true
-                        self.viewDatas.name = self.name
-                        
-                        self.email = ""
-                        self.password = ""
-                        self.checkPassword = ""
-                        self.name = ""
-                    }
-                }
+                // firestore 문서 이름 = 사용자 이름
+                self.db.document(self.email).setData([
+                    "name" : self.name,
+                    "foodName" : "",
+                    "foodCount" : "",
+                    "foodPrice" : "",
+                ])
+                self.check = true
+                self.viewDatas.email = self.email
+                
+                self.email = ""
+                self.password = ""
+                self.checkPassword = ""
+                self.name = ""
             } else {
                 print(error!)
                 self.error = "이미 해당 이메일이 존재합니다."

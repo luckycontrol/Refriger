@@ -43,7 +43,7 @@ struct FoodInfo: View {
                         .resizable().frame(height: 320)
                     
                     Text(name)
-                        .font(.system(size: 16))
+                        .font(.system(size: 20, weight: .semibold))
                         .padding(.vertical, 6)
                     
                     HStack {
@@ -118,7 +118,7 @@ struct FoodInfo: View {
                             .foregroundColor(Color("pink"))
                     }
                     .frame(width: 150, height: 50)
-                    .border(Color("pink"), width: 5)
+                    .border(Color("pink"), width: 3)
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 
@@ -165,7 +165,6 @@ struct FoodInfo: View {
 
 struct AddCartButton: View {
     
-    @Environment(\.managedObjectContext) var context
     enum ActiveAlert {
         case addAlert, duplicate
     }
@@ -178,81 +177,83 @@ struct AddCartButton: View {
     let foodCount: String
     let foodPrice: String
     
-    @FetchRequest(entity: Select.entity(),
-                  sortDescriptors: [NSSortDescriptor(keyPath: \Select.id, ascending: false)]
-    ) var selectList: FetchedResults<Select>
+    @State var foodNames: [String]! = []
+    @State var foodCounts: [String]! = []
+    @State var foodPrices: [String]! = []
     
-    let db = Firestore.firestore().collection("selectionList")
+    let db = Firestore.firestore().collection("users")
     
     var body: some View {
         
         Group {
             if self.viewDatas.login {
                 Button(action: {
-                    if self.checkDuplicate(foodName: self.foodName) {
-                        // 장바구니에 이미 해당 식자재가 있으면
-                        self.alert.toggle()
-                        self.activeAlert = "duplicate"
-                    } else {
-                        // 장바구니에 해당 식자재가 없으면
-                        self.addCart()
-                        self.alert.toggle()
-                        self.activeAlert = "addAlert"
+                    
+                    self.getSelectList { (foodNames, foodCounts, foodPrices, getData) in
+                        if getData {
+                            if self.checkDuplicate(foodNames: foodNames) {
+                                self.alert.toggle()
+                                self.activeAlert = "duplicate"
+                            } else {
+                                self.alert.toggle()
+                                self.addCart()
+                                self.activeAlert = "addAlert"
+                            }
+                        }
                     }
                 }) {
                     HStack {
                         Text("장바구니 추가")
-                            .foregroundColor(.gray)
+                            .foregroundColor(.orange)
                     }
                     .frame(width: 150, height: 50)
-                    .border(Color.gray, width: 5)
+                    .border(Color.orange, width: 3)
                 }.clipShape(RoundedRectangle(cornerRadius: 5))
             } else {
                 NavigationLink(destination: SelectList(viewDatas: viewDatas)) {
                     HStack {
                         Text("장바구니 추가")
-                            .foregroundColor(.gray)
+                            .foregroundColor(.orange)
                     }
                     .frame(width: 150, height: 50)
-                    .border(Color.gray, width: 5)
+                    .border(Color.orange, width: 3)
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 5))
             }
         }
     }
     
-    func checkDuplicate(foodName: String) -> Bool {
-        // true면 중복 false면 중복 아님
-        var duplicate: Bool = false
-        var foodNames: [String] = []
-        var selectionList: [String : Any] = [:]
-        
-        db.getDocuments() { (querySnapshot, err) in
-            for document in querySnapshot!.documents {
-                if String(describing: document.data()["name"]) == self.viewDatas.name {
-                    selectionList = document.data()
-                }
-            }
+    func getSelectList(completion: @escaping ([String], [String], [String], Bool) -> Void) {
+        db.document(self.viewDatas.email).getDocument{ (document, error) in
+            self.foodNames = String(describing: document!.data()!["foodName"]!).components(separatedBy: "|")
+            self.foodCounts = String(describing: document!.data()!["foodCount"]!).components(separatedBy: "|")
+            self.foodPrices = String(describing: document!.data()!["foodPrice"]!).components(separatedBy: "|")
+            completion(self.foodNames, self.foodCounts, self.foodPrices, true)
         }
-        // 콤마를 분리해서 각 음식 이름 배열 만들기
-        foodNames = String(describing: selectionList["foodName"]).components(separatedBy: ",")
-        
-        // 배열에서 음식이름 찾기. 추가하고자 하는 음식이름이 배열 내에 있으면 중복.
-        for name in foodNames {
-            if self.foodName == name { duplicate = true }
-        }
-        
-        return duplicate
     }
     
+    func checkDuplicate(foodNames: [String]) -> Bool{
+        for food in foodNames {
+            if food == foodName {
+                return true
+            }
+        }
+        return false
+    }
+    
+    
     func addCart() {
-        let newCell = Select(context: context)
+        self.foodNames.append(foodName)
+        self.foodCounts.append(foodCount)
+        self.foodPrices.append(foodPrice)
         
-        newCell.id = UUID()
-        newCell.foodName = self.foodName
-        newCell.foodCount = self.foodCount
-        newCell.foodPrice = self.foodPrice
+        db.document(self.viewDatas.email).setData([
+            "name" : viewDatas.name,
+            "email" : viewDatas.email,
+            "foodName" : foodNames.joined(separator: "|"),
+            "foodCount" : foodCounts.joined(separator: "|"),
+            "foodPrice" : foodPrices.joined(separator: "|"),
+        ])
         
-        do { try context.save() } catch { print(error) }
     }
 }

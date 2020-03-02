@@ -11,6 +11,7 @@ import SwiftUI
 
 class ViewDatas: ObservableObject {
     
+    @Published var email: String = "이메일"
     @Published var name: String = "회원"
     @Published var login: Bool = false
     

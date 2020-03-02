@@ -25,15 +25,13 @@ struct SelectList: View {
     
     @Environment(\.managedObjectContext) var context
     
-    // 사용자의 장바구니목록을 firestore에서 가져옴
+    let db = Firestore.firestore().collection("users")
+    @State var foodNames: [String] = []
+    @State var foodCounts: [String] = []
+    @State var foodPrices: [String] = []
     
-    var totalPrice: Int {
-        var p: Int = 0
-        for c in selectList {
-            p = p + Int((c.foodPrice?.components(separatedBy: ",").joined())!)!
-        }
-        return p
-    }
+    // 총 결제금액 수정필요 - foodPrices를 통해서 게산
+    @State var totalPrice: String = ""
     
     var body: some View {
         
@@ -62,7 +60,7 @@ struct SelectList: View {
                                         if self.edit {
                                             Button(action: {
                                                 self.setMinusPrice(foodPrice: Int((c.foodPrice?.components(separatedBy: ",").joined())!)!)
-                                                self.removeSelected(cell: c)
+                                                
                                             }) {
                                                 Text("삭제").foregroundColor(.red).fontWeight(.semibold)
                                             }
@@ -73,7 +71,7 @@ struct SelectList: View {
                             }
                         }.padding(.horizontal, 10)
                         
-                        TotalPrice(totalPrice: totalPrice, minusPrice: $minusPrice)
+                        Text(totalPrice)
                         
                         // 결제 버튼
                         Spacer()
@@ -99,6 +97,14 @@ struct SelectList: View {
                 }
                 .navigationBarTitle("장바구니 목록")
                 .navigationBarItems(trailing: SelectRightView(edit: $edit))
+                .onAppear {
+                    self.getSelectionList { foodNames, foodCounts, foodPrices, getData in
+                        if getData {
+                            // totalPrice 계산
+                            self.totalPrice = self.getTotalPrice(foodPrices: foodPrices)
+                        }
+                    }
+                }
             }
             
             else {
@@ -108,31 +114,48 @@ struct SelectList: View {
         
     }
     
+    func getSelectionList(completion: @escaping ([String], [String], [String], Bool) -> Void) {
+        db.document(viewDatas.email).getDocument{ (document, error) in
+            self.foodNames = String(describing: document!.data()!["foodName"]!).components(separatedBy: "|")
+            self.foodCounts = String(describing: document!.data()!["foodCount"]!).components(separatedBy: "|")
+            self.foodPrices = String(describing: document!.data()!["foodPrice"]!).components(separatedBy: "|")
+            completion(self.foodNames, self.foodCounts, self.foodPrices, true)
+        }
+    }
+    
+    func getTotalPrice(foodPrices: [String]) -> String {
+        var sum: Int = 0
+        var sum_str: String = ""
+        
+        for price in foodPrices {
+            sum = sum + Int(price.components(separatedBy: ",").joined())!
+        }
+        
+        sum_str = String(sum)
+        if sum_str.count == 7 {
+            let i = sum_str.index(sum_str.startIndex, offsetBy: 4)
+            sum_str.insert(",", at: i)
+        }
+        if sum_str.count == 6 {
+            let i = sum_str.index(sum_str.startIndex, offsetBy: 3)
+            sum_str.insert(",", at: i)
+        }
+        if sum_str.count == 5 {
+            let i = sum_str.index(sum_str.startIndex, offsetBy: 2)
+            sum_str.insert(",", at: i)
+        }
+        if sum_str.count == 4 {
+            let i = sum_str.index(sum_str.startIndex, offsetBy: 1)
+            sum_str.insert(",", at: i)
+        }
+        
+        return sum_str
+    }
+    
     func setMinusPrice(foodPrice: Int) {
         self.minusPrice = self.minusPrice - foodPrice
     }
     
-    func removeSelected(cell: Select) {
-        self.context.delete(cell)
-        
-        do{
-            try context.save()
-        }catch { print(error) }
-    }
-}
-
-struct TotalPrice: View {
-    
-    @State var totalPrice: Int
-    
-    @Binding var minusPrice: Int
-    
-    var body: some View {
-        Text("총 결제금액 : \(totalPrice - minusPrice)")
-            .font(.system(size: 20, weight: .semibold))
-            .multilineTextAlignment(.leading)
-            .padding([.leading, .top], 15)
-    }
 }
 
 struct SelectRightView: View {

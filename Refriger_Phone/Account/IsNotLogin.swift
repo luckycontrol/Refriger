@@ -84,25 +84,18 @@ struct IsNotLogin: View {
     }
     
     func signIn() {
-        let mail = self.email
         session.signIn(email: email, password: password) { (result, error) in
             if error == nil {
-                self.db.getDocuments() { (querySnapshot, err) in
-                    if let err = err {
-                        print("Error : \(err)")
-                    } else {
-                        // 로그인 성공
-                        for document in querySnapshot!.documents {
-                            if String(describing: document.data()["email"]!) == mail {
-                                self.viewDatas.name = String(describing: document.data()["name"]!)
-                                self.email = ""
-                                self.password = ""
-                                self.viewDatas.login = true
-                                break
-                            }
-                        }
-                    }
+                self.db.document(self.email).getDocument { (document, err) in
+                    if let document = document, document.exists {
+                        self.viewDatas.email = self.email
+                        self.viewDatas.name = String(describing: document.data()!["name"]!)
+                        self.email = ""
+                        self.password = ""
+                        self.viewDatas.login = true
+                    } else { print("Document dose not exist")}
                 }
+                
             } else {
                 self.error = "입력하신 계정이 올바르지 않습니다."
             }

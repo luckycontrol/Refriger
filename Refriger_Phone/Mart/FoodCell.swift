@@ -45,7 +45,7 @@ struct FoodCell: View {
             .clipShape(RoundedRectangle(cornerRadius: 15))
             .shadow(color: .gray, radius: 2, x: 1, y: 1)
             .padding(.horizontal, 20)
-            .padding(.vertical, 30)
+            .padding(.vertical, 15)
             
         }
     }
