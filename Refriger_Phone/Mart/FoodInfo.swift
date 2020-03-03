@@ -112,13 +112,13 @@ struct FoodInfo: View {
                 AddCartButton(viewDatas: viewDatas, alert: $alert, activeAlert: $activeAlert, foodName: name, foodCount: String(count), foodPrice: price)
 
                 NavigationLink(destination: SelectList(viewDatas: viewDatas)) {
-                    
                     HStack {
                         Text("구매하기")
                             .foregroundColor(Color("pink"))
                     }
                     .frame(width: 150, height: 50)
                     .border(Color("pink"), width: 3)
+                    
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 5))
                 
@@ -188,7 +188,6 @@ struct AddCartButton: View {
         Group {
             if self.viewDatas.login {
                 Button(action: {
-                    
                     self.getSelectList { (foodNames, foodCounts, foodPrices, getData) in
                         if getData {
                             if self.checkDuplicate(foodNames: foodNames) {

@@ -32,6 +32,7 @@ struct SearchBar: View {
                 }.foregroundColor(.black)
                 .background(Color.white)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
+                .shadow(color: .gray, radius: 2, x: -1, y: 1)
                 
             }
             
@@ -44,6 +45,7 @@ struct SearchBar: View {
             }.foregroundColor(.black)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 10))
+            .shadow(color: .gray, radius: 2, x: -1, y: 1)
         }.padding()
     }
 }

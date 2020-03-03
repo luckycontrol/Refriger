@@ -19,13 +19,8 @@ struct SelectList: View {
     
     @State var minusPrice: Int = 0
     
-    @FetchRequest(entity: Select.entity(),
-                  sortDescriptors: [NSSortDescriptor(keyPath: \Select.id, ascending: false)]
-    ) var selectList: FetchedResults<Select>
-    
-    @Environment(\.managedObjectContext) var context
-    
     let db = Firestore.firestore().collection("users")
+    @State var foodDatas: FoodDatas = FoodDatas()
     @State var foodNames: [String] = []
     @State var foodCounts: [String] = []
     @State var foodPrices: [String] = []
@@ -36,12 +31,10 @@ struct SelectList: View {
     var body: some View {
         
         Group {
-            
             if viewDatas.login {
-                
                 VStack {
                     // 장바구니에 추가한 내역이 있을 때
-                    if selectList.count > 0 {
+                    if foodNames.count > 0 {
                         ScrollView(.vertical, showsIndicators: false) {
                             HStack {
                                 Text("\(viewDatas.name) 님의 장바구니 내역입니다.")
@@ -49,29 +42,33 @@ struct SelectList: View {
                                 .padding([.top, .bottom], 20)
                                 Spacer()
                             }
-                            
-                            ForEach(selectList) { c in
+                            /*
+                            ForEach(0 ... foodNames.count, id: \.self) { i in
                                 VStack {
                                     HStack(spacing: 14) {
-                                        Text("\(c.foodName!)")
-                                        Text("\(c.foodCount!)개")
-                                        Text("\(c.foodPrice!)원")
+                                        Text("\(self.foodDatas.foodName[i])")
+                                        Text("\(self.foodDatas.foodCount[i])개")
+                                        Text("\(self.foodDatas.foodPrice[i])원")
                                         Spacer()
                                         if self.edit {
+                                            /*
                                             Button(action: {
-                                                self.setMinusPrice(foodPrice: Int((c.foodPrice?.components(separatedBy: ",").joined())!)!)
+                                                self.setMinusPrice(foodPrice: Int((c.foodPrice.components(separatedBy: ",").joined())!)!)
                                                 
                                             }) {
                                                 Text("삭제").foregroundColor(.red).fontWeight(.semibold)
                                             }
+                                            */
                                         }
                                     }
                                     Divider().padding(.horizontal, 10)
                                 }
                             }
+                            */
+                            
                         }.padding(.horizontal, 10)
                         
-                        Text(totalPrice)
+                        Text("총 결제금액 : \(totalPrice)")
                         
                         // 결제 버튼
                         Spacer()
@@ -101,13 +98,12 @@ struct SelectList: View {
                     self.getSelectionList { foodNames, foodCounts, foodPrices, getData in
                         if getData {
                             // totalPrice 계산
-                            self.totalPrice = self.getTotalPrice(foodPrices: foodPrices)
+                            self.totalPrice = self.getTotalPrice(foodDatas: self.foodDatas)
                         }
                     }
+                    print(self.foodNames)
                 }
-            }
-            
-            else {
+            } else {
                 IsNotLogin(viewDatas: viewDatas)
             }
         }
@@ -119,36 +115,41 @@ struct SelectList: View {
             self.foodNames = String(describing: document!.data()!["foodName"]!).components(separatedBy: "|")
             self.foodCounts = String(describing: document!.data()!["foodCount"]!).components(separatedBy: "|")
             self.foodPrices = String(describing: document!.data()!["foodPrice"]!).components(separatedBy: "|")
+            
+            self.foodNames.remove(at: 0)
+            self.foodCounts.remove(at: 0)
+            self.foodPrices.remove(at: 0)
+            
             completion(self.foodNames, self.foodCounts, self.foodPrices, true)
         }
     }
     
-    func getTotalPrice(foodPrices: [String]) -> String {
+    func getTotalPrice(foodDatas: FoodDatas) -> String {
+        var foodPrices: [String] = []
         var sum: Int = 0
         var sum_str: String = ""
         
-        for price in foodPrices {
-            sum = sum + Int(price.components(separatedBy: ",").joined())!
+        /*
+        for p in foodDatas {
+            
+        }
+        */
+        /*
+        for i in 0 ... foodPrices.count - 1 {
+            sum = sum + Int(foodPrices[i].components(separatedBy: ",").joined())!
         }
         
         sum_str = String(sum)
-        if sum_str.count == 7 {
-            let i = sum_str.index(sum_str.startIndex, offsetBy: 4)
-            sum_str.insert(",", at: i)
-        }
-        if sum_str.count == 6 {
-            let i = sum_str.index(sum_str.startIndex, offsetBy: 3)
-            sum_str.insert(",", at: i)
-        }
-        if sum_str.count == 5 {
-            let i = sum_str.index(sum_str.startIndex, offsetBy: 2)
-            sum_str.insert(",", at: i)
-        }
-        if sum_str.count == 4 {
-            let i = sum_str.index(sum_str.startIndex, offsetBy: 1)
-            sum_str.insert(",", at: i)
-        }
+        let c = sum_str.count
+        let i = sum_str.index(sum_str.startIndex, offsetBy: c - 3)
         
+        if c == 7 {
+            sum_str.insert(",", at: sum_str.index(sum_str.startIndex, offsetBy: 1))
+            sum_str.insert(",", at: i)
+        } else {
+            sum_str.insert(",", at: i)
+        }
+        */
         return sum_str
     }
     
@@ -167,5 +168,11 @@ struct SelectRightView: View {
             Text(edit ? "수정완료" : "목록수정")
         }
     }
+}
+
+class FoodDatas: ObservableObject {
+    @Published var foodName: [String] = []
+    @Published var foodCount: [String] = []
+    @Published var foodPrice: [String] = []
 }
 
