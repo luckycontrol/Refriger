@@ -15,93 +15,69 @@ struct SelectList: View {
     
     @ObservedObject var viewDatas: ViewDatas
     
-    @State var edit: Bool = false
-    
     @State var minusPrice: Int = 0
     
     let db = Firestore.firestore().collection("users")
     @State var foodDatas: FoodDatas = FoodDatas()
-    @State var foodNames: [String] = []
-    @State var foodCounts: [String] = []
-    @State var foodPrices: [String] = []
+    @State var showSelectionList: Bool = false
     
     // 총 결제금액 수정필요 - foodPrices를 통해서 게산
+    @State var edit: Bool = false
     @State var totalPrice: String = ""
     
     var body: some View {
         
         Group {
             if viewDatas.login {
-                VStack {
-                    // 장바구니에 추가한 내역이 있을 때
-                    if foodNames.count > 0 {
-                        ScrollView(.vertical, showsIndicators: false) {
+                ZStack {
+                    if showSelectionList {
+                        VStack {
                             HStack {
                                 Text("\(viewDatas.name) 님의 장바구니 내역입니다.")
-                                .font(.system(size: 22, weight: .semibold))
-                                .padding([.top, .bottom], 20)
+                                    .font(.system(size: 24, weight: .bold))
                                 Spacer()
-                            }
-                            /*
-                            ForEach(0 ... foodNames.count, id: \.self) { i in
-                                VStack {
-                                    HStack(spacing: 14) {
+                            }.padding([.vertical, .leading], 15)
+                            ForEach(0 ... foodDatas.foodName.count - 1, id: \.self) { i in
+                                VStack(spacing: 15) {
+                                    HStack {
                                         Text("\(self.foodDatas.foodName[i])")
-                                        Text("\(self.foodDatas.foodCount[i])개")
-                                        Text("\(self.foodDatas.foodPrice[i])원")
+                                        Text("\(self.foodDatas.foodCount[i]) 개")
+                                        Text("\(self.foodDatas.foodPrice[i]) 원")
                                         Spacer()
                                         if self.edit {
-                                            /*
-                                            Button(action: {
-                                                self.setMinusPrice(foodPrice: Int((c.foodPrice.components(separatedBy: ",").joined())!)!)
-                                                
-                                            }) {
-                                                Text("삭제").foregroundColor(.red).fontWeight(.semibold)
+                                            Button(action: {}) {
+                                                Text("삭제").foregroundColor(.red)
                                             }
-                                            */
                                         }
                                     }
-                                    Divider().padding(.horizontal, 10)
+                                    Divider()
                                 }
+                                .padding([.top, .horizontal], 15)
                             }
-                            */
                             
-                        }.padding(.horizontal, 10)
-                        
-                        Text("총 결제금액 : \(totalPrice)")
-                        
-                        // 결제 버튼
-                        Spacer()
-                        Button(action: {}) {
-                            HStack {
-                                Text("결제").foregroundColor(.white).fontWeight(.semibold)
-                            }
-                            .frame(width: 250, height: 50)
-                            .background(Color("Color"))
-                            .clipShape(Capsule())
-                        }.padding(.bottom, 15)
-                        
-                        // 장바구니에 추가한 것이 아무것도 없을 때
-                    } else {
-                        VStack(spacing: 8) {
-                            Text("장바구니 내역이 없습니다.")
-                                .font(.system(size: 23, weight: .bold))
-                            Text("원하시는 식품들로 장비구니를 채워보세요!")
-                                .font(.system(size: 22, weight: .bold))
-                                .multilineTextAlignment(.center)
+                            Spacer()
+                            
+                            Text("총 결제금액 : ")
+                            Button(action: {}) {
+                                ZStack {
+                                    Capsule()
+                                        .frame(width: 300, height: 55)
+                                        .foregroundColor(Color("Color"))
+                                    
+                                    Text("구매하기")
+                                        .foregroundColor(.white)
+                                }
+                            }.padding(.bottom, 15)
                         }
+                        .navigationBarTitle("장바구니 목록", displayMode: .inline)
                     }
                 }
-                .navigationBarTitle("장바구니 목록")
-                .navigationBarItems(trailing: SelectRightView(edit: $edit))
                 .onAppear {
-                    self.getSelectionList { foodNames, foodCounts, foodPrices, getData in
+                    self.getSelectionList { getData in
                         if getData {
-                            // totalPrice 계산
-                            self.totalPrice = self.getTotalPrice(foodDatas: self.foodDatas)
+                            self.showSelectionList = true
                         }
                     }
-                    print(self.foodNames)
                 }
             } else {
                 IsNotLogin(viewDatas: viewDatas)
@@ -110,17 +86,17 @@ struct SelectList: View {
         
     }
     
-    func getSelectionList(completion: @escaping ([String], [String], [String], Bool) -> Void) {
+    func getSelectionList(completion: @escaping (Bool) -> Void) {
         db.document(viewDatas.email).getDocument{ (document, error) in
-            self.foodNames = String(describing: document!.data()!["foodName"]!).components(separatedBy: "|")
-            self.foodCounts = String(describing: document!.data()!["foodCount"]!).components(separatedBy: "|")
-            self.foodPrices = String(describing: document!.data()!["foodPrice"]!).components(separatedBy: "|")
+            self.foodDatas.foodName = String(describing: document!.data()!["foodName"]!).components(separatedBy: "|")
+            self.foodDatas.foodCount = String(describing: document!.data()!["foodCount"]!).components(separatedBy: "|")
+            self.foodDatas.foodPrice = String(describing: document!.data()!["foodPrice"]!).components(separatedBy: "|")
             
-            self.foodNames.remove(at: 0)
-            self.foodCounts.remove(at: 0)
-            self.foodPrices.remove(at: 0)
+            self.foodDatas.foodName.remove(at: 0)
+            self.foodDatas.foodCount.remove(at: 0)
+            self.foodDatas.foodPrice.remove(at: 0)
             
-            completion(self.foodNames, self.foodCounts, self.foodPrices, true)
+            completion(true)
         }
     }
     
@@ -175,4 +151,3 @@ class FoodDatas: ObservableObject {
     @Published var foodCount: [String] = []
     @Published var foodPrice: [String] = []
 }
-

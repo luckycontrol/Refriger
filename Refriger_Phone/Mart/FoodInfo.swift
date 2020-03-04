@@ -63,30 +63,33 @@ struct FoodInfo: View {
                                     productPrice: Int(self.productPrice.components(separatedBy: ",").joined())!
                                 )
                             }) {
-                                
-                                Image(systemName: "minus")
-                                    .frame(width: 25, height: 25)
-                                    .foregroundColor(Color("pink"))
-                                    .clipShape(Circle())
-                                    .border(Color("pink"), width: 2)
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .foregroundColor(.white)
+                                        .frame(width: 25, height: 25)
+                                        .shadow(color: .gray, radius: 0.5, x: -1, y: 1)
+                                    
+                                    Image(systemName: "minus")
+                                }
                             }
                         }
                         // 수량 증가 버튼
                         Button(action: {
                             self.count += 1
-                            
                             self.setProductNumbers(
                                 action: "add",
                                 price: Int(self.price.components(separatedBy: ",").joined())!,
                                 productPrice: Int(self.productPrice.components(separatedBy: ",").joined())!
                             )
                         }) {
-                            
-                            Image(systemName: "plus")
-                                .frame(width: 25, height: 25)
-                                .foregroundColor(Color("pink"))
-                                .clipShape(Circle())
-                                .border(Color("pink"), width: 2)
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .foregroundColor(.white)
+                                    .frame(width: 25, height: 25)
+                                    .shadow(color: .gray, radius: 0.5, x: -1, y: 1)
+                                
+                                Image(systemName: "plus")
+                            }
                         }.padding(.leading, 20)
                     }
     
@@ -111,16 +114,17 @@ struct FoodInfo: View {
                 
                 AddCartButton(viewDatas: viewDatas, alert: $alert, activeAlert: $activeAlert, foodName: name, foodCount: String(count), foodPrice: price)
 
-                NavigationLink(destination: SelectList(viewDatas: viewDatas)) {
-                    HStack {
-                        Text("구매하기")
-                            .foregroundColor(Color("pink"))
-                    }
-                    .frame(width: 150, height: 50)
-                    .border(Color("pink"), width: 3)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 5)
+                        .foregroundColor(.white)
+                        .frame(width: 150, height: 50)
+                        .shadow(color: .gray, radius: 2, x: 1, y: 1)
+                        .shadow(color: .white, radius: 2, x: -1, y: -1)
                     
+                    NavigationLink(destination: SelectList(viewDatas: viewDatas)) {
+                        Text("구매하기")
+                    }
                 }
-                .clipShape(RoundedRectangle(cornerRadius: 5))
                 
             }
             .padding(.horizontal, 10)
@@ -201,23 +205,28 @@ struct AddCartButton: View {
                         }
                     }
                 }) {
-                    HStack {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundColor(.white)
+                            .frame(width: 150, height: 50)
+                            .shadow(color: .gray, radius: 2, x: 1, y: 1)
+                            .shadow(color: .white, radius: 2, x: -1, y: -1)
+                        
                         Text("장바구니 추가")
-                            .foregroundColor(.orange)
                     }
-                    .frame(width: 150, height: 50)
-                    .border(Color.orange, width: 3)
-                }.clipShape(RoundedRectangle(cornerRadius: 5))
-            } else {
-                NavigationLink(destination: SelectList(viewDatas: viewDatas)) {
-                    HStack {
-                        Text("장바구니 추가")
-                            .foregroundColor(.orange)
-                    }
-                    .frame(width: 150, height: 50)
-                    .border(Color.orange, width: 3)
                 }
-                .clipShape(RoundedRectangle(cornerRadius: 5))
+            } else {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 5)
+                        .foregroundColor(.white)
+                        .frame(width: 150, height: 50)
+                        .shadow(color: .gray, radius: 2, x: 1, y: 1)
+                        .shadow(color: .white, radius: 2, x: -1, y: -1)
+                    
+                    NavigationLink(destination: SelectList(viewDatas: viewDatas)) {
+                        Text("장바구니 추가")
+                    }
+                }
             }
         }
     }
@@ -256,3 +265,4 @@ struct AddCartButton: View {
         
     }
 }
+
