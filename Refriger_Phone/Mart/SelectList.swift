@@ -31,51 +31,58 @@ struct SelectList: View {
             if viewDatas.login {
                 ZStack {
                     if showSelectionList {
-                        VStack {
-                            HStack {
-                                Text("\(viewDatas.name) 님의 장바구니 내역입니다.")
-                                    .font(.system(size: 24, weight: .bold))
-                                Spacer()
-                            }.padding([.vertical, .leading], 15)
-                            ForEach(0 ... foodDatas.foodName.count - 1, id: \.self) { i in
-                                VStack(spacing: 15) {
-                                    HStack {
-                                        Text("\(self.foodDatas.foodName[i])")
-                                        Text("\(self.foodDatas.foodCount[i]) 개")
-                                        Text("\(self.foodDatas.foodPrice[i]) 원")
-                                        Spacer()
-                                        if self.edit {
-                                            Button(action: {}) {
-                                                Text("삭제").foregroundColor(.red)
+                        if foodDatas.foodName.count > 0 {
+                            VStack {
+                                HStack {
+                                    Text("\(viewDatas.name) 님의 장바구니 내역입니다.")
+                                        .font(.system(size: 24, weight: .bold))
+                                    Spacer()
+                                }.padding([.vertical, .leading], 15)
+                                ScrollView(.vertical, showsIndicators: false) {
+                                    ForEach(0 ... foodDatas.foodName.count - 1, id: \.self) { i in
+                                        VStack(spacing: 15) {
+                                            HStack {
+                                                Text("\(self.foodDatas.foodName[i])")
+                                                Text("\(self.foodDatas.foodCount[i]) 개")
+                                                Text("\(self.foodDatas.foodPrice[i]) 원")
+                                                Spacer()
+                                                // 삭제 뷰 작성 - 일정량 드래그시 프린트
                                             }
+                                            Divider()
                                         }
+                                        .padding([.top, .horizontal], 15)
                                     }
-                                    Divider()
                                 }
-                                .padding([.top, .horizontal], 15)
+                                
+                                Spacer()
+                                
+                                Text("총 결제금액 : \(totalPrice) 원")
+                                Button(action: {}) {
+                                    ZStack {
+                                        Capsule()
+                                            .frame(width: 300, height: 55)
+                                            .foregroundColor(Color("Color"))
+                                        
+                                        Text("구매하기")
+                                            .foregroundColor(.white)
+                                    }
+                                }.padding(.bottom, 15)
                             }
-                            
-                            Spacer()
-                            
-                            Text("총 결제금액 : ")
-                            Button(action: {}) {
-                                ZStack {
-                                    Capsule()
-                                        .frame(width: 300, height: 55)
-                                        .foregroundColor(Color("Color"))
-                                    
-                                    Text("구매하기")
-                                        .foregroundColor(.white)
-                                }
-                            }.padding(.bottom, 15)
+                            .navigationBarTitle("장바구니 목록", displayMode: .inline)
+                        } else {
+                            VStack {
+                                Text("장바구니 내역이 비었습니다!")
+                                    .font(.system(size: 22, weight: .bold))
+                            }
+                            .navigationBarTitle("장바구니 목록", displayMode: .inline)
                         }
-                        .navigationBarTitle("장바구니 목록", displayMode: .inline)
                     }
                 }
                 .onAppear {
                     self.getSelectionList { getData in
                         if getData {
                             self.showSelectionList = true
+                            self.totalPrice = self.getTotalPrice()
                         }
                     }
                 }
@@ -92,27 +99,25 @@ struct SelectList: View {
             self.foodDatas.foodCount = String(describing: document!.data()!["foodCount"]!).components(separatedBy: "|")
             self.foodDatas.foodPrice = String(describing: document!.data()!["foodPrice"]!).components(separatedBy: "|")
             
-            self.foodDatas.foodName.remove(at: 0)
-            self.foodDatas.foodCount.remove(at: 0)
-            self.foodDatas.foodPrice.remove(at: 0)
+            if self.foodDatas.foodName[0] == "" {
+                self.foodDatas.foodName.remove(at: 0)
+                self.foodDatas.foodCount.remove(at: 0)
+                self.foodDatas.foodPrice.remove(at: 0)
+            }
             
             completion(true)
         }
     }
     
-    func getTotalPrice(foodDatas: FoodDatas) -> String {
-        var foodPrices: [String] = []
+    func getTotalPrice() -> String {
         var sum: Int = 0
         var sum_str: String = ""
         
-        /*
-        for p in foodDatas {
-            
+        if foodDatas.foodName.count == 0 {
+            return "0"
         }
-        */
-        /*
-        for i in 0 ... foodPrices.count - 1 {
-            sum = sum + Int(foodPrices[i].components(separatedBy: ",").joined())!
+        for i in 0 ..< foodDatas.foodPrice.count {
+            sum = sum + Int(foodDatas.foodPrice[i].components(separatedBy: ",").joined())!
         }
         
         sum_str = String(sum)
@@ -125,25 +130,26 @@ struct SelectList: View {
         } else {
             sum_str.insert(",", at: i)
         }
-        */
+        
         return sum_str
     }
     
-    func setMinusPrice(foodPrice: Int) {
-        self.minusPrice = self.minusPrice - foodPrice
+    func removeSelection(index: Int) {
+        foodDatas.foodName.remove(at: index)
+        foodDatas.foodCount.remove(at: index)
+        foodDatas.foodPrice.remove(at: index)
+        
+        let foodNames: String = foodDatas.foodName.joined(separator: "|")
+        let foodCounts: String = foodDatas.foodCount.joined(separator: "|")
+        let foodPrices: String = foodDatas.foodPrice.joined(separator: "|")
+        
+        db.document(viewDatas.email).setData([
+            "foodName" : foodNames,
+            "foodCount" : foodCounts,
+            "foodPrice" : foodPrices,
+        ], merge: true)
     }
     
-}
-
-struct SelectRightView: View {
-    
-    @Binding var edit: Bool
-    
-    var body: some View {
-        Button(action: { withAnimation { self.edit.toggle() } }) {
-            Text(edit ? "수정완료" : "목록수정")
-        }
-    }
 }
 
 class FoodDatas: ObservableObject {
