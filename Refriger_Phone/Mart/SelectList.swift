@@ -18,7 +18,7 @@ struct SelectList: View {
     @State var minusPrice: Int = 0
     
     let db = Firestore.firestore().collection("users")
-    @State var foodDatas: FoodDatas = FoodDatas()
+    @State var Select = SelectedList()
     @State var showSelectionList: Bool = false
     
     // 총 결제금액 수정필요 - foodPrices를 통해서 게산
@@ -31,23 +31,39 @@ struct SelectList: View {
             if viewDatas.login {
                 ZStack {
                     if showSelectionList {
-                        if foodDatas.foodName.count > 0 {
+                        if self.Select.selectedList.count > 0 {
                             VStack {
                                 HStack {
-                                    Text("\(viewDatas.name) 님의 장바구니 내역입니다.")
+                                    Text("\(viewDatas.name)")
                                         .font(.system(size: 24, weight: .bold))
+                                        .foregroundColor(Color("Color-1"))
+                                    Text(" 님의 장바구니 내역입니다.")
+                                        .font(.system(size: 20, weight: .semibold))
                                     Spacer()
                                 }.padding([.vertical, .leading], 15)
                                 ScrollView(.vertical, showsIndicators: false) {
-                                    ForEach(0 ... foodDatas.foodName.count - 1, id: \.self) { i in
-                                        VStack(spacing: 15) {
+                                    ForEach(self.Select.selectedList) { i in
+                                        VStack {
                                             HStack {
-                                                Text("\(self.foodDatas.foodName[i])")
-                                                Text("\(self.foodDatas.foodCount[i]) 개")
-                                                Text("\(self.foodDatas.foodPrice[i]) 원")
+                                                Image(i.foodName)
+                                                    .resizable()
+                                                    .frame(width: 60, height: 60)
+                                                VStack(alignment: .leading){
+                                                    HStack(spacing: 20){
+                                                        Text("\(i.foodName) \(i.foodCount) 개")
+                                                            .lineLimit(nil)
+                                                    }
+                                                    Text("\(i.foodPrice) 원")
+                                                }
                                                 Spacer()
-                                                // 삭제 뷰 작성 - 일정량 드래그시 프린트
+                                                if self.edit {
+                                                    Button(action: { self.removeSeletedFood(name: i.foodName) }) {
+                                                        Text("삭제")
+                                                            .foregroundColor(.red)
+                                                    }
+                                                }
                                             }
+                                            .fixedSize(horizontal: false, vertical: true)
                                             Divider()
                                         }
                                         .padding([.top, .horizontal], 15)
@@ -69,6 +85,7 @@ struct SelectList: View {
                                 }.padding(.bottom, 15)
                             }
                             .navigationBarTitle("장바구니 목록", displayMode: .inline)
+                            .navigationBarItems(trailing: SelectedSideBar(edit: $edit))
                         } else {
                             VStack {
                                 Text("장바구니 내역이 비었습니다!")
@@ -90,19 +107,26 @@ struct SelectList: View {
                 IsNotLogin(viewDatas: viewDatas)
             }
         }
-        
     }
     
     func getSelectionList(completion: @escaping (Bool) -> Void) {
         db.document(viewDatas.email).getDocument{ (document, error) in
-            self.foodDatas.foodName = String(describing: document!.data()!["foodName"]!).components(separatedBy: "|")
-            self.foodDatas.foodCount = String(describing: document!.data()!["foodCount"]!).components(separatedBy: "|")
-            self.foodDatas.foodPrice = String(describing: document!.data()!["foodPrice"]!).components(separatedBy: "|")
+            let foodNames = String(describing: document!.data()!["foodName"]!).components(separatedBy: "|")
+            let foodCounts = String(describing: document!.data()!["foodCount"]!).components(separatedBy: "|")
+            let foodPrices = String(describing: document!.data()!["foodPrice"]!).components(separatedBy: "|")
             
-            if self.foodDatas.foodName[0] == "" {
-                self.foodDatas.foodName.remove(at: 0)
-                self.foodDatas.foodCount.remove(at: 0)
-                self.foodDatas.foodPrice.remove(at: 0)
+            for i in 0 ..< foodNames.count {
+                self.Select.selectedList.append(
+                    SelectedType(
+                        foodName: foodNames[i],
+                        foodCount: foodCounts[i],
+                        foodPrice: foodPrices[i]
+                    )
+                )
+            }
+            
+            if self.Select.selectedList[0].foodName == "" {
+                self.Select.selectedList.remove(at: 0)
             }
             
             completion(true)
@@ -113,11 +137,11 @@ struct SelectList: View {
         var sum: Int = 0
         var sum_str: String = ""
         
-        if foodDatas.foodName.count == 0 {
+        if self.Select.selectedList.count == 0 {
             return "0"
         }
-        for i in 0 ..< foodDatas.foodPrice.count {
-            sum = sum + Int(foodDatas.foodPrice[i].components(separatedBy: ",").joined())!
+        for s in self.Select.selectedList {
+            sum = sum + Int(s.foodPrice.components(separatedBy: ",").joined())!
         }
         
         sum_str = String(sum)
@@ -134,14 +158,22 @@ struct SelectList: View {
         return sum_str
     }
     
-    func removeSelection(index: Int) {
-        foodDatas.foodName.remove(at: index)
-        foodDatas.foodCount.remove(at: index)
-        foodDatas.foodPrice.remove(at: index)
+    func removeSeletedFood(name: String) {
+        var foodNames: String = ""
+        var foodCounts: String = ""
+        var foodPrices: String = ""
+        for i in 0 ..< Select.selectedList.count {
+            if Select.selectedList[i].foodName == name {
+                Select.selectedList.remove(at: i)
+                break
+            }
+        }
         
-        let foodNames: String = foodDatas.foodName.joined(separator: "|")
-        let foodCounts: String = foodDatas.foodCount.joined(separator: "|")
-        let foodPrices: String = foodDatas.foodPrice.joined(separator: "|")
+        for i in 0 ..< Select.selectedList.count {
+            foodNames = foodNames + "|" + Select.selectedList[i].foodName
+            foodCounts = foodCounts + "|" + Select.selectedList[i].foodCount
+            foodPrices = foodPrices + "|" + Select.selectedList[i].foodPrice
+        }
         
         db.document(viewDatas.email).setData([
             "foodName" : foodNames,
@@ -149,11 +181,28 @@ struct SelectList: View {
             "foodPrice" : foodPrices,
         ], merge: true)
     }
-    
 }
 
-class FoodDatas: ObservableObject {
-    @Published var foodName: [String] = []
-    @Published var foodCount: [String] = []
-    @Published var foodPrice: [String] = []
+struct SelectedSideBar: View {
+    @Binding var edit: Bool
+    var body: some View {
+        Button(action: {
+            withAnimation{
+                self.edit.toggle()
+            }
+        }) {
+            Text("목록수정")
+        }
+    }
+}
+
+class SelectedList: ObservableObject{
+    @Published var selectedList = [SelectedType]()
+}
+
+struct SelectedType: Identifiable {
+    var id = UUID()
+    var foodName: String
+    var foodCount: String
+    var foodPrice: String
 }
