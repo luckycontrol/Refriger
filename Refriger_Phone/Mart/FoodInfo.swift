@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import FirebaseFirestoreSwift
+import FirebaseFirestore
 import Firebase
 
 struct FoodInfo: View {

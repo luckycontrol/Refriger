@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Firebase
-import FirebaseFirestoreSwift
+import FirebaseFirestore
 
 struct CreateAccount: View {
     
@@ -79,6 +79,9 @@ struct CreateAccount: View {
             if error == nil {
                 // firestore 문서 이름 = 사용자 이름
                 self.db.document(self.email).setData([
+                    "HP" : "",
+                    "address" : "",
+                    "email" : self.email,
                     "name" : self.name,
                     "foodName" : "",
                     "foodCount" : "",

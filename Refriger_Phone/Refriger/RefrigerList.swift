@@ -37,11 +37,13 @@ struct RefrigerList: View {
             ZStack {
                 
                 Color("MartBackground")
+                Text("")
                 
                 ShowAllFoods(filter: $filter, delete: $delete)
                     .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
                         self.noti()
                 }
+                
                 
                 GeometryReader { geometry in
                     
@@ -141,6 +143,19 @@ struct RefrigerListCell: View {
         return formatter
     }()
     
+    let foodType: String?
+    let foodName: String?
+    let foodDate: String?
+    
+    init(delete: Binding<Bool>, food: Food) {
+        self._delete = delete
+        self.food = food
+        
+        self.foodType = food.foodType
+        self.foodName = food.foodName
+        self.foodDate = self.dataFormatter.string(from: food.expiration!)
+    }
+    
     var body: some View {
         
         ZStack {
@@ -161,13 +176,14 @@ struct RefrigerListCell: View {
                     .padding(.trailing, 15)
                     .offset(x: -3, y: -3)
                 }
-                Image("\(food.foodType!)선택")
+                // 데이터의 주소를 보내지말고 값만 보내서 출력시킬것
+                Image("\(foodType ?? "")선택")
                     .resizable().frame(width: 60, height: 60)
                 
                 VStack(spacing: 8) {
-                    Text(food.foodName!)
+                    Text(foodName ?? "")
                         .foregroundColor(.black).fontWeight(.semibold)
-                    Text("유통기한 : \(dataFormatter.string(from: food.expiration!))")
+                    Text("유통기한 : \(foodDate ?? "")")
                 }
             }.padding(.horizontal)
         }

@@ -9,7 +9,7 @@
 // 장바구니 리스트
 import SwiftUI
 import Firebase
-import FirebaseFirestoreSwift
+import FirebaseFirestore
 
 struct SelectList: View {
     

@@ -143,7 +143,7 @@ struct SelfSideButtons: View {
                     self.selfData.selfAddDataList.append(selfAddData())
                     self.selfData.selfAddDataList[self.selfData.selfAddDataList.count - 1].id = self.selfData.selfAddDataList.count - 1
                 }) {
-                    PlusButton(image: "plus")
+                    PlusButton(action: "추가")
                 }.transition(.move(edge: .leading))
             }
             
@@ -153,12 +153,12 @@ struct SelfSideButtons: View {
                     self.addFood()
                     self.add = true
                 }) {
-                    PlusButton(image: "folder.badge.plus")
+                    PlusButton(action: "저장")
                 }.transition(.move(edge: .leading))
             }
             
             Button(action: { self.showButtons() }) {
-                PlusButton(image: "pencil")
+                PlusButton(action: "수정")
             }
             
         }.padding()
@@ -317,7 +317,7 @@ struct SelfRightNav: View {
 
 struct PlusButton: View {
     
-    var image: String
+    var action: String
     
     var body: some View {
         
@@ -327,10 +327,10 @@ struct PlusButton: View {
                 .frame(width: 50, height: 50)
                 .foregroundColor(Color("Color"))
                 .shadow(color: .gray, radius: 1, x: 1, y: 2)
-            Image(systemName: image)
-                .resizable()
-                .frame(width: 20, height: 20)
+            
+            Text(action)
                 .foregroundColor(.white)
+                
         }
         .shadow(color: .gray, radius: 0.2, x: 1, y: 1)
     }

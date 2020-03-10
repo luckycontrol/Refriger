@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
 
 struct Mart: View {
     
@@ -256,15 +258,119 @@ struct SideUserInfo: View {
     
     @ObservedObject var viewDatas: ViewDatas
     
+    let db = Firestore.firestore().collection("users")
+    
+    @State var email: String = ""
+    @State var hp: String = ""
+    @State var address: String = ""
+    @State var getData: Bool = false
+    
     var body: some View {
         Group {
             if viewDatas.login {
-                Text("유저 정보")
+                ScrollView(.vertical, showsIndicators: false) {
+                    if getData {
+                        VStack {
+                            Text("\(viewDatas.name)님 안녕하세요.")
+                                .font(.system(size: 24, weight: .bold))
+                                .padding(.bottom, 10)
+                            Text("정보를 추가 기입하시거나 수정할 수 있습니다.")
+                                .font(.system(size: 16))
+                                .foregroundColor(.gray).opacity(0.8)
+                        }
+                        .padding(.vertical, 25)
+                        
+                        HStack {
+                            Text("이메일")
+                                .font(.system(size: 16, weight: .semibold))
+                            Spacer()
+                        }.padding(.leading, 15)
+                        UserInformation(info: $email).padding(.bottom, 15)
+                        
+                        HStack {
+                            Text("휴대폰 번호")
+                                .font(.system(size: 16, weight: .semibold))
+                            Spacer()
+                        }.padding(.leading, 15)
+                        UserInformation(info: $hp).padding(.bottom, 15)
+                        
+                        HStack {
+                            Text("주소")
+                                .font(.system(size: 16, weight: .semibold))
+                            Spacer()
+                        }.padding(.leading, 15)
+                        UserInformation(info: $address).padding(.bottom, 15)
+                        
+                        Spacer()
+                    }
+                }
+                .background(Color("MartBackground"))
+                .onAppear {
+                    self.getUserInfo { getData in
+                        if getData {
+                            self.getData = true
+                        }
+                    }
+                }
+                .onDisappear {
+                    
+                }
             }
             else {
                 IsNotLogin(viewDatas: viewDatas)
             }
         }
+    }
+    
+    func getUserInfo(completion: @escaping (Bool) -> Void) {
+        db.document(self.viewDatas.email).getDocument{ (document, error) in
+            self.hp = document?.data()!["HP"] as! String
+            self.address = document?.data()!["address"] as! String
+            
+            if self.hp == "" { self.hp = "휴대폰 번호를 입력해주세요." }
+            if self.address == "" { self.address = "주소를 입력해주세요. " }
+            
+            self.email = self.viewDatas.email
+            
+            completion(true)
+        }
+    }
+    
+    func saveUserInfo() {
+        if hp == "휴대폰 번호를 입력해주세요." { hp = "" }
+        if address == "주소를 입력해주세요." { address = "" }
+        
+        viewDatas.email = email
+        
+        db.document(self.viewDatas.email).setData([
+            "email" : email,
+            "HP" : hp,
+            "address" : address,
+        ], merge: true)
+    }
+}
+
+struct UserInformation: View {
+    
+    @Binding var info: String
+    
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 5)
+                .frame(height: 50)
+                .foregroundColor(.white)
+                .shadow(color: .gray, radius: 2, x: 1, y: 1)
+            
+            if info == "" {
+                TextField(info, text: $info)
+                    .foregroundColor(.gray).opacity(0.8)
+                    .padding(.leading, 10)
+            } else {
+                TextField(info, text: $info)
+                    .foregroundColor(.black)
+                    .padding(.leading, 10)
+            }
+        }.padding(.horizontal, 15)
     }
 }
 
