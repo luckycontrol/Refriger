@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4B748D5AA5D51D49B7B6A20E /* Pods_Refriger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C38280D06900C062A7DB70B /* Pods_Refriger.framework */; };
+		5D45C0782420A08700649818 /* SearchingAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D45C0772420A08700649818 /* SearchingAddress.swift */; };
+		5D45C07A2420ACC700649818 /* EditPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D45C0792420ACC700649818 /* EditPhoneNumber.swift */; };
 		5D46E71D2412AB560031C3FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D46E71C2412AB560031C3FF /* GoogleService-Info.plist */; };
-		5D57F40923F93CFA00901F55 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 5D57F40823F93CFA00901F55 /* SwiftPackageProductDependency */; };
+		5D57F40923F93CFA00901F55 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 5D57F40823F93CFA00901F55 /* CodeScanner */; };
 		5D57F40B23F9601B00901F55 /* ShowAllFoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D57F40A23F9601B00901F55 /* ShowAllFoods.swift */; };
 		5D57F40D23F9628B00901F55 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D57F40C23F9628B00901F55 /* SearchBar.swift */; };
 		5D57F40F23FBB5B000901F55 /* Food+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D57F40E23FBB5B000901F55 /* Food+Extensions.swift */; };
@@ -54,6 +56,8 @@
 /* Begin PBXFileReference section */
 		23B9BD7D35EF2E19A6207B44 /* Pods-Refriger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refriger.debug.xcconfig"; path = "Target Support Files/Pods-Refriger/Pods-Refriger.debug.xcconfig"; sourceTree = "<group>"; };
 		5C38280D06900C062A7DB70B /* Pods_Refriger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refriger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D45C0772420A08700649818 /* SearchingAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingAddress.swift; sourceTree = "<group>"; };
+		5D45C0792420ACC700649818 /* EditPhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneNumber.swift; sourceTree = "<group>"; };
 		5D46E71C2412AB560031C3FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5D57F40A23F9601B00901F55 /* ShowAllFoods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllFoods.swift; sourceTree = "<group>"; };
 		5D57F40C23F9628B00901F55 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -92,7 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D57F40923F93CFA00901F55 /* BuildFile in Frameworks */,
+				5D57F40923F93CFA00901F55 /* CodeScanner in Frameworks */,
 				4B748D5AA5D51D49B7B6A20E /* Pods_Refriger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,6 +177,8 @@
 				5D5927DC23EC7B9A002E1FCC /* IsNotLogin.swift */,
 				5D5927CF23EC7A4E002E1FCC /* CreateAccount.swift */,
 				5D5927D323EC7AAF002E1FCC /* FindAccount.swift */,
+				5D45C0772420A08700649818 /* SearchingAddress.swift */,
+				5D45C0792420ACC700649818 /* EditPhoneNumber.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -207,6 +213,7 @@
 				5D59279E23EC77BB002E1FCC /* Resources */,
 				5D244AD824008F820067E47D /* Embed Frameworks */,
 				36D906EA1E76A0FA9994B87F /* [CP] Embed Pods Frameworks */,
+				4F34C56958807E2FFC046455 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -214,7 +221,7 @@
 			);
 			name = Refriger;
 			packageProductDependencies = (
-				5D57F40823F93CFA00901F55 /* SwiftPackageProductDependency */,
+				5D57F40823F93CFA00901F55 /* CodeScanner */,
 			);
 			productName = Refriger;
 			productReference = 5D5927A023EC77BB002E1FCC /* Refriger.app */;
@@ -246,8 +253,8 @@
 			);
 			mainGroup = 5D59279723EC77BB002E1FCC;
 			packageReferences = (
-				5D57F40723F93CFA00901F55 /* RemoteSwiftPackageReference */,
-				5D57F41023FC332500901F55 /* RemoteSwiftPackageReference */,
+				5D57F40723F93CFA00901F55 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				5D57F41023FC332500901F55 /* XCRemoteSwiftPackageReference "QGrid" */,
 			);
 			productRefGroup = 5D5927A123EC77BB002E1FCC /* Products */;
 			projectDirPath = "";
@@ -290,6 +297,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Refriger/Pods-Refriger-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4F34C56958807E2FFC046455 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Refriger/Pods-Refriger-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Refriger/Pods-Refriger-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Refriger/Pods-Refriger-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		85B2E568028D124DAABFD046 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -322,6 +346,8 @@
 				5D5927EB23EC861F002E1FCC /* SessionStore.swift in Sources */,
 				5D5927E123EC7BA1002E1FCC /* PurchaseView.swift in Sources */,
 				5D5927A423EC77BB002E1FCC /* AppDelegate.swift in Sources */,
+				5D45C07A2420ACC700649818 /* EditPhoneNumber.swift in Sources */,
+				5D45C0782420A08700649818 /* SearchingAddress.swift in Sources */,
 				5D5927F123EC8BF0002E1FCC /* RefrigerData.swift in Sources */,
 				5D5927D923EC7B8E002E1FCC /* FoodInfo.swift in Sources */,
 				5D5927D723EC7B86002E1FCC /* FoodCell.swift in Sources */,
@@ -542,7 +568,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5D57F40723F93CFA00901F55 /* RemoteSwiftPackageReference */ = {
+		5D57F40723F93CFA00901F55 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twostraws/CodeScanner.git";
 			requirement = {
@@ -550,7 +576,7 @@
 				minimumVersion = 1.0.2;
 			};
 		};
-		5D57F41023FC332500901F55 /* RemoteSwiftPackageReference */ = {
+		5D57F41023FC332500901F55 /* XCRemoteSwiftPackageReference "QGrid" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Q-Mobile/QGrid";
 			requirement = {
@@ -561,9 +587,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5D57F40823F93CFA00901F55 /* SwiftPackageProductDependency */ = {
+		5D57F40823F93CFA00901F55 /* CodeScanner */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5D57F40723F93CFA00901F55 /* RemoteSwiftPackageReference */;
+			package = 5D57F40723F93CFA00901F55 /* XCRemoteSwiftPackageReference "CodeScanner" */;
 			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */

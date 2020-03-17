@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var session: SessionStore
+    
 
     var body: some View {
         

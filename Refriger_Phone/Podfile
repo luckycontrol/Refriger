@@ -4,12 +4,13 @@
 target 'Refriger' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  # use_modular_headers!
 
   # Pods for Refriger
 
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'FirebaseFirestoreSwift'
+pod 'GoogleMaps'
+pod 'GooglePlaces'
 
 end

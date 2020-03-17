@@ -42,6 +42,7 @@ class SessionStore: ObservableObject {
     
     func signOut() {
         try! Auth.auth().signOut()
+        self.session = nil
     }
     
     func unbind() {
