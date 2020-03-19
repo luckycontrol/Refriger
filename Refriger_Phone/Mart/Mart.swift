@@ -274,7 +274,7 @@ struct SideUserInfo: View {
     @State var isRemoveAccount_Alert: Bool = false
     @State var removeState: RemoveAlert = .remove
     
-    @State var p: CGFloat = -UIScreen.main.bounds.height
+    @State var p: CGSize = .zero
     
     var body: some View {
         
@@ -319,6 +319,8 @@ struct SideUserInfo: View {
                         }
                     }
                     .background(Color("MartBackground"))
+                    .navigationBarHidden(editUserAddr ? true : false)
+                    .navigationBarTitle(editUserAddr ? "" : "회원정보")
                     .onAppear {
                         self.getUserInfo { getData in
                             if getData { self.getData = true }
@@ -340,12 +342,25 @@ struct SideUserInfo: View {
                     return logout
                 }
             }
-            
             GeometryReader { geometry in
                 SearchingAddress()
-                    .offset(y: self.editUserAddr ? 0 : self.p)
-                    .animation(.default)
-                    .background(Color.white)
+                    .offset(y: self.editUserAddr ? self.p.height : UIScreen.main.bounds.height)
+                    .animation(.spring())
+                    .gesture(DragGesture()
+                        .onChanged { value in
+                            if value.translation.height > 0 {
+                                self.p.height = value.translation.height
+                            }
+                        }
+                        .onEnded { value in
+                            if value.translation.height > 200 {
+                                withAnimation {
+                                    self.editUserAddr = false
+                                }
+                                self.p = .zero
+                            } else { self.p = .zero }
+                        }
+                )
             }
         }
     }
@@ -495,7 +510,9 @@ struct UserInformation_Cell: View {
                             .foregroundColor(.white)
                             .border(Color.black)
                         
-                        Button(action: { self.editUserAddr = true }) {
+                        Button(action: {
+                            self.editUserAddr = true
+                        }) {
                             Text("변경")
                                 .foregroundColor(.black)
                         }

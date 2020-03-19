@@ -14,6 +14,8 @@ struct SearchingAddress: View {
         VStack {
             Text("Hello")
         }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+        .background(Color.white)
     }
 }
 
