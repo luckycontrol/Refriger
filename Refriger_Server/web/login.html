@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-sacale=1.0">
+        <!-- 이미지 js 스크립트 -->
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <!-- jquery js 스크립트 -->
+        <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+        <!-- firebase js 스크립트 -->
+        <script src="/__/firebase/7.12.0/firebase-app.js"></script>
+        <script src="/__/firebase/7.12.0/firebase-auth.js"></script>
+        <script src="/__/firebase/7.12.0/firebase-firestore.js"></script>
+        <script src="/__/firebase/init.js"></script>
+        <!-- CSS 파일들 -->
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="loginCss.css">
+        <title> 안녕, 나의 냉장고 </title>
+        <script>
+          function signIn() {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            if (email.length < 4) {
+              alert("이메일 형식이 올바르지 않습니다.");
+              return;
+            }
+            if (password.length < 4) {
+              alert("비밀번호 형식이 올바르지 않습니다.");
+              return;
+            }
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+              .then(function(firebaseUser) {
+                loginSuccess(firebaseUser);
+              })
+              .catch(function(error) {
+                var errCode = error.code;
+                var errMessage = error.message;
+
+                alert(errcode);
+                /*
+                if (errCode === 'auth/wrong-password') {
+                  alert("비밀번호가 올바르지 않습니다.");
+                }
+                */
+              })
+          }
+
+          function loginSuccess(firebaseUser) {
+            location.href="/index.html?true";
+          }
+
+          function orderList() {
+            alert("권한이 없습니다. 로그인을 먼저 해주세요.");
+          }
+
+          function completeList() {
+            alert("권한이 없습니다. 로그인을 먼저 해주세요.");
+          } 
+
+          $(document).ready(function(){
+              $('#icon').click(function(){
+                $('ul').toggleClass('show')
+              })
+            })
+        </script>
+    </head>
+
+    <body>
+      <nav>
+        <a class="logo" href="index.html"> Refriger </a>
+        <ul>
+          <li> <a class="category" onclick="orderList()">주문 내역</a></li>
+          <li> <a class="category" onclick="completeList()">구매 완료 내역</a></li>
+          <li> <a class="category" href="introSite.html">사이트 소개</a></li>
+          <li> <a class="category" href="introEditor.html">제작자 소개</a></li>
+          <li> <a class="category" href="login.html">로그인</a></li>
+        </ul>
+  
+        <label id="icon">
+          <i class="fas fa-bars"></i>
+        </label>
+      </nav>
+
+      <div class="loginBox">
+        <h1> 로그인 </h1>
+        <div class="textBox">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <input type="text" placeholder="이메일을 입력하세요." id="email" name="email" value="" required>
+        </div>
+
+        <div class="textBox">
+          <i class="fa fa-lock" aria-hidden="true"></i>
+          <input type="password" placeholder="비밀번호를 입력하세요." id="password" name="password" value="" required>
+        </div>
+
+        <button onclick="signIn()" class="btn">로그인</button>
+      </div>
+
+      <div class="warning">
+        <p> 관리자 전용 페이지입니다. 일반 사용자분들은 사용하실 수 없습니다. </p>
+      </div>
+    </body>
+</html>

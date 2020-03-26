@@ -7,6 +7,8 @@
 
 body {
     font-family: monospace;
+    background: url(images/bg1.jpeg) no-repeat;
+    background-size: cover;
 }
 
 nav {
@@ -35,6 +37,10 @@ nav li {
     line-height: 80px;
 }
 
+nav a.logo {
+    cursor: pointer;
+}
+
 nav a.category {
     color: white;
     font-size: 18px;
@@ -42,9 +48,10 @@ nav a.category {
     border: 1px solid transparent;
     padding: 7px 10px;
     border-radius: 3px;
+    cursor: pointer;
 }
 
-a.category:hover {
+nav a.category:hover {
     border: 1px solid white;
     transition: 3s;
 }
@@ -110,16 +117,14 @@ nav #icon {
     }
 }
 
-section {
-    background: url(images/bg1.jpeg) no-repeat;
-    background-size: cover;
-    height: calc(100vh - 80px);
-}
-
 div.introduce{
     color: white;
     padding-top: 150px;
     text-align: center;
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
 }
 
 div.introduce p {
@@ -135,6 +140,12 @@ p.text {
     font-size: 20px;
 }
 
-section h1.name {
-    font-size: 100px;
-}
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+ }
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+ }
