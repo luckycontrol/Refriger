@@ -9,7 +9,7 @@
 // 장바구니 리스트
 import SwiftUI
 import Firebase
-import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 struct SelectList: View {
     
@@ -17,13 +17,14 @@ struct SelectList: View {
     
     @State var minusPrice: Int = 0
     
-    let db = Firestore.firestore().collection("users")
+    let db = Firestore.firestore()
     @State var Select = SelectedList()
     @State var showSelectionList: Bool = false
     
     // 총 결제금액 수정필요 - foodPrices를 통해서 게산
     @State var edit: Bool = false
     @State var totalPrice: String = ""
+    @State var purchase: Bool = false
     
     var body: some View {
         
@@ -73,7 +74,7 @@ struct SelectList: View {
                                 Spacer()
                                 
                                 Text("총 결제금액 : \(totalPrice) 원")
-                                Button(action: {}) {
+                                NavigationLink(destination: PurchaseView(viewDatas: viewDatas,Select: $Select, totalPrice: $totalPrice)) {
                                     ZStack {
                                         Capsule()
                                             .frame(width: 300, height: 55)
@@ -103,6 +104,9 @@ struct SelectList: View {
                         }
                     }
                 }
+                .onDisappear {
+                    self.Select.selectedList = []
+                }
             } else {
                 IsNotLogin(viewDatas: viewDatas)
             }
@@ -110,7 +114,7 @@ struct SelectList: View {
     }
     
     func getSelectionList(completion: @escaping (Bool) -> Void) {
-        db.document(viewDatas.email).getDocument{ (document, error) in
+        db.collection("users").document(viewDatas.email).getDocument{ (document, error) in
             let foodNames = String(describing: document!.data()!["foodName"]!).components(separatedBy: "|")
             let foodCounts = String(describing: document!.data()!["foodCount"]!).components(separatedBy: "|")
             let foodPrices = String(describing: document!.data()!["foodPrice"]!).components(separatedBy: "|")
@@ -132,7 +136,7 @@ struct SelectList: View {
             completion(true)
         }
     }
-    
+    // 최종 금액 계산
     func getTotalPrice() -> String {
         var sum: Int = 0
         var sum_str: String = ""
@@ -157,7 +161,7 @@ struct SelectList: View {
         
         return sum_str
     }
-    
+    // 음식 지우기
     func removeSeletedFood(name: String) {
         var foodNames: String = ""
         var foodCounts: String = ""
@@ -175,7 +179,7 @@ struct SelectList: View {
             foodPrices = foodPrices + "|" + Select.selectedList[i].foodPrice
         }
         
-        db.document(viewDatas.email).setData([
+        db.collection("users").document(viewDatas.email).setData([
             "foodName" : foodNames,
             "foodCount" : foodCounts,
             "foodPrice" : foodPrices,

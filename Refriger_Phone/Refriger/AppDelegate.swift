@@ -9,8 +9,6 @@
 import UIKit
 import CoreData
 import Firebase
-import GoogleMaps
-import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,8 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
-        GMSServices.provideAPIKey("AIzaSyBcThQtj-nipGaxtO5-iTck55ANXTVT1zg")
-        GMSPlacesClient.provideAPIKey("AIzaSyBcThQtj-nipGaxtO5-iTck55ANXTVT1zg")
         
         return true
     }

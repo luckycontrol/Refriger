@@ -6,11 +6,8 @@ target 'Refriger' do
   use_frameworks!
 
   # Pods for Refriger
-
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'FirebaseFirestoreSwift'
-pod 'GoogleMaps'
-pod 'GooglePlaces'
 
 end

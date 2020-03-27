@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "0172EB56-F7D7-417D-ADEC-4FDD906C1E37"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A145660C-A77B-4CB5-90BE-DE41AA26CBA5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Account/IsNotLogin.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "IsNotLogin"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "A145660C-A77B-4CB5-90BE-DE41AA26CBA5 - 25baba09110bb19f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of Refriger.IsNotLogin.email : Swift.String"
+                  moduleName = "Refriger"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jojong-un/Desktop/projects/xcode/Ios/Refriger/Refriger_Phone/Account/IsNotLogin.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "A145660C-A77B-4CB5-90BE-DE41AA26CBA5 - a6f46c1adb208e61"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Refriger.IsNotLogin.email.getter : Swift.String"
+                  moduleName = "Refriger"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jojong-un/Desktop/projects/xcode/Ios/Refriger/Refriger_Phone/Account/IsNotLogin.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "168">
+               </Location>
+               <Location
+                  uuid = "A145660C-A77B-4CB5-90BE-DE41AA26CBA5 - 8f310ca0cbd19e55"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Refriger.IsNotLogin.email.setter : Swift.String"
+                  moduleName = "Refriger"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jojong-un/Desktop/projects/xcode/Ios/Refriger/Refriger_Phone/Account/IsNotLogin.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "276">
+               </Location>
+               <Location
+                  uuid = "A145660C-A77B-4CB5-90BE-DE41AA26CBA5 - eb6704fd7f306264"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Refriger.IsNotLogin.email.modify : Swift.String"
+                  moduleName = "Refriger"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jojong-un/Desktop/projects/xcode/Ios/Refriger/Refriger_Phone/Account/IsNotLogin.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "A145660C-A77B-4CB5-90BE-DE41AA26CBA5 - 7d56b652ae9c1655"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Refriger.IsNotLogin.email.modify : Swift.String with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Refriger"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jojong-un/Desktop/projects/xcode/Ios/Refriger/Refriger_Phone/Account/IsNotLogin.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  uuid = "A145660C-A77B-4CB5-90BE-DE41AA26CBA5 - 8caf0dbdd74fd07d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Refriger.IsNotLogin.$email.getter : SwiftUI.Binding&lt;Swift.String&gt;"
+                  moduleName = "Refriger"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jojong-un/Desktop/projects/xcode/Ios/Refriger/Refriger_Phone/Account/IsNotLogin.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "184">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

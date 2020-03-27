@@ -256,12 +256,10 @@ struct AddCartButton: View {
         self.foodPrices.append(foodPrice)
         
         db.document(self.viewDatas.email).setData([
-            "name" : viewDatas.name,
-            "email" : viewDatas.email,
             "foodName" : foodNames.joined(separator: "|"),
             "foodCount" : foodCounts.joined(separator: "|"),
             "foodPrice" : foodPrices.joined(separator: "|"),
-        ])
+        ], merge: true)
         
     }
 }

@@ -32,12 +32,12 @@
 		5D5927DB23EC7B94002E1FCC /* FoodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927DA23EC7B94002E1FCC /* FoodType.swift */; };
 		5D5927DD23EC7B9A002E1FCC /* IsNotLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927DC23EC7B9A002E1FCC /* IsNotLogin.swift */; };
 		5D5927DF23EC7B9E002E1FCC /* Mart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927DE23EC7B9E002E1FCC /* Mart.swift */; };
-		5D5927E123EC7BA1002E1FCC /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927E023EC7BA1002E1FCC /* PurchaseView.swift */; };
 		5D5927E923EC85F1002E1FCC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927E823EC85F1002E1FCC /* ContentView.swift */; };
 		5D5927EB23EC861F002E1FCC /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927EA23EC861F002E1FCC /* SessionStore.swift */; };
 		5D5927ED23EC8692002E1FCC /* SelfAddFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927EC23EC8692002E1FCC /* SelfAddFood.swift */; };
 		5D5927EF23EC86C0002E1FCC /* RefrigerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927EE23EC86C0002E1FCC /* RefrigerList.swift */; };
 		5D5927F123EC8BF0002E1FCC /* RefrigerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5927F023EC8BF0002E1FCC /* RefrigerData.swift */; };
+		5D6FF047242CF5DC000632E4 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6FF046242CF5DC000632E4 /* PurchaseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -81,12 +81,12 @@
 		5D5927DA23EC7B94002E1FCC /* FoodType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodType.swift; sourceTree = "<group>"; };
 		5D5927DC23EC7B9A002E1FCC /* IsNotLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsNotLogin.swift; sourceTree = "<group>"; };
 		5D5927DE23EC7B9E002E1FCC /* Mart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mart.swift; sourceTree = "<group>"; };
-		5D5927E023EC7BA1002E1FCC /* PurchaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		5D5927E823EC85F1002E1FCC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5D5927EA23EC861F002E1FCC /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
 		5D5927EC23EC8692002E1FCC /* SelfAddFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfAddFood.swift; sourceTree = "<group>"; };
 		5D5927EE23EC86C0002E1FCC /* RefrigerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefrigerList.swift; sourceTree = "<group>"; };
 		5D5927F023EC8BF0002E1FCC /* RefrigerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefrigerData.swift; sourceTree = "<group>"; };
+		5D6FF046242CF5DC000632E4 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		5DCB26A923F1B6B000C67C1D /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		F59FC388224A61B1D5A1AA62 /* Pods-Refriger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refriger.release.xcconfig"; path = "Target Support Files/Pods-Refriger/Pods-Refriger.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,7 +165,7 @@
 				5D57F40C23F9628B00901F55 /* SearchBar.swift */,
 				5D5927DA23EC7B94002E1FCC /* FoodType.swift */,
 				5D5927C723EC7930002E1FCC /* SelectList.swift */,
-				5D5927E023EC7BA1002E1FCC /* PurchaseView.swift */,
+				5D6FF046242CF5DC000632E4 /* PurchaseView.swift */,
 			);
 			path = Mart;
 			sourceTree = "<group>";
@@ -213,7 +213,6 @@
 				5D59279E23EC77BB002E1FCC /* Resources */,
 				5D244AD824008F820067E47D /* Embed Frameworks */,
 				36D906EA1E76A0FA9994B87F /* [CP] Embed Pods Frameworks */,
-				4F34C56958807E2FFC046455 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -297,23 +296,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Refriger/Pods-Refriger-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4F34C56958807E2FFC046455 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Refriger/Pods-Refriger-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Refriger/Pods-Refriger-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Refriger/Pods-Refriger-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		85B2E568028D124DAABFD046 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -344,7 +326,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D5927EB23EC861F002E1FCC /* SessionStore.swift in Sources */,
-				5D5927E123EC7BA1002E1FCC /* PurchaseView.swift in Sources */,
 				5D5927A423EC77BB002E1FCC /* AppDelegate.swift in Sources */,
 				5D45C07A2420ACC700649818 /* EditPhoneNumber.swift in Sources */,
 				5D45C0782420A08700649818 /* SearchingAddress.swift in Sources */,
@@ -362,6 +343,7 @@
 				5D5927E923EC85F1002E1FCC /* ContentView.swift in Sources */,
 				5D57F40B23F9601B00901F55 /* ShowAllFoods.swift in Sources */,
 				5D5927ED23EC8692002E1FCC /* SelfAddFood.swift in Sources */,
+				5D6FF047242CF5DC000632E4 /* PurchaseView.swift in Sources */,
 				5D57F40D23F9628B00901F55 /* SearchBar.swift in Sources */,
 				5D5927C823EC7930002E1FCC /* SelectList.swift in Sources */,
 				5D5927CC23EC7A1A002E1FCC /* AccountInfo.swift in Sources */,
@@ -437,7 +419,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -492,7 +474,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
