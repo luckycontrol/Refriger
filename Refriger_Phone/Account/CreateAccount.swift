@@ -13,7 +13,7 @@ import FirebaseFirestore
 struct CreateAccount: View {
     
     @EnvironmentObject var session: SessionStore
-    let db = Firestore.firestore().collection("users")
+    let db = Firestore.firestore()
     
     @ObservedObject var viewDatas: ViewDatas
     
@@ -78,7 +78,7 @@ struct CreateAccount: View {
         session.signUp(email: email, password: password) { (result, error) in
             if error == nil {
                 // firestore 문서 이름 = 사용자 이름
-                self.db.document(self.email).setData([
+                self.db.collection("users").document(self.email).setData([
                     "HP" : "",
                     "address" : "",
                     "email" : self.email,
@@ -87,6 +87,7 @@ struct CreateAccount: View {
                     "foodCount" : "",
                     "foodPrice" : "",
                 ])
+                
                 self.check = true
                 self.viewDatas.email = self.email
                 

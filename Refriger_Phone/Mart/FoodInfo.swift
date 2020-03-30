@@ -236,6 +236,13 @@ struct AddCartButton: View {
             self.foodNames = String(describing: document!.data()!["foodName"]!).components(separatedBy: "|")
             self.foodCounts = String(describing: document!.data()!["foodCount"]!).components(separatedBy: "|")
             self.foodPrices = String(describing: document!.data()!["foodPrice"]!).components(separatedBy: "|")
+            
+            if self.foodNames[0] == "" {
+                self.foodNames = []
+                self.foodCounts = []
+                self.foodPrices = []
+            }
+            
             completion(self.foodNames, self.foodCounts, self.foodPrices, true)
         }
     }

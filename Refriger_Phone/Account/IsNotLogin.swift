@@ -25,7 +25,6 @@ struct IsNotLogin: View {
     var body: some View {
         
         VStack {
-            
             HStack(spacing: 10) {
                 Image("mart")
                 Text("Cho Mart")
@@ -93,9 +92,10 @@ struct IsNotLogin: View {
                         self.email = ""
                         self.password = ""
                         self.viewDatas.login = true
-                    } else { print("Document dose not exist")}
+                    } else {
+                        self.error = "입력하신 계정이 존재하지 않습니다."
+                    }
                 }
-                
             } else {
                 self.error = "입력하신 계정이 올바르지 않습니다."
             }

@@ -74,7 +74,7 @@ struct SelectList: View {
                                 Spacer()
                                 
                                 Text("총 결제금액 : \(totalPrice) 원")
-                                NavigationLink(destination: PurchaseView(viewDatas: viewDatas,Select: $Select, totalPrice: $totalPrice)) {
+                                NavigationLink(destination: PurchaseView(viewDatas: viewDatas, totalPrice: $totalPrice)) {
                                     ZStack {
                                         Capsule()
                                             .frame(width: 300, height: 55)
