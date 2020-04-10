@@ -28,16 +28,15 @@ class NotificationManager {
         }
     }
     
-    func sendNotification(food: String, leftTime: String, hour: Int) {
+    func sendNotification(message: String) {
         
-        /// 매일 오전 8시에 알림
         var components = DateComponents()
-        components.hour = hour
-        components.minute = 0
+        components.hour = 2
+        components.minute = 38
         
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = "유통기한을 확인해주세요."
-        notificationContent.body = "[ \(food) ]의 유통기한이 얼마 남지 않았습니다."
+        notificationContent.body = "현재 유통기한이 " + message + " 식자재가 있습니다."
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
         

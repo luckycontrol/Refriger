@@ -24,8 +24,6 @@ struct RefrigerList: View {
     
     @State var p: CGSize = .zero
     
-    let notificationManager = NotificationManager()
-    
     @FetchRequest(entity: Food.entity(),
                   sortDescriptors: [NSSortDescriptor(keyPath: \Food.expiration, ascending: false)]
     ) var foodDatas: FetchedResults<Food>
@@ -40,10 +38,6 @@ struct RefrigerList: View {
                 Text("")
                 
                 ShowAllFoods(filter: $filter, delete: $delete)
-                    .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-                        self.noti()
-                }
-                
                 
                 GeometryReader { geometry in
                     
@@ -69,47 +63,12 @@ struct RefrigerList: View {
                 }
                 .background(Color.black.opacity(self.show ? 0.5 : 0))
                 .onTapGesture { self.show = false }
-                
-                
             }
             .navigationBarItems(leading: LeftButton(show: $show), trailing: RightButton(delete: $delete))
             .navigationBarTitle("식자재 목록", displayMode: .inline)
         }
         .sheet(isPresented: $qrcode) {
             CodeScannerView(codeTypes: [.qr], simulatedData: "테스트용", completion: self.handleScan)
-        }
-    }
-    
-    /// 알람 메서드
-    func noti() -> Void {
-        
-        var aWeek: String = ""
-        var befor3Days: String = ""
-        var befor1Days: String = ""
-        var dDays: String = ""
-        var trash: String = ""
-        let hour: Int = 7
-        
-        let check: [String] = [aWeek, befor3Days, befor1Days, dDays, trash]
-        let text: [String] = ["일주일 남았습니다.", "3일 남았습니다.", "하루 남았습니다.", "오늘까지입니다.", "유통기한이 지났습니다"]
-        
-        let calendar = Calendar.current
-        
-        for f in foodDatas {
-            let dateGap = calendar.dateComponents([.day], from: Date(), to: f.expiration!)
-            
-            if dateGap.day == 7 { aWeek = aWeek + f.foodName!}
-            else if dateGap.day == 3 { befor3Days = befor3Days + f.foodName!}
-            else if dateGap.day == 1 { befor1Days = befor1Days + f.foodName!}
-            else if dateGap.day == 0 { dDays = dDays + f.foodName!}
-            else { trash = trash + f.foodName! }
-        }
-        
-        for i in 0 ..< check.count {
-            if check[i] != "" {
-                print(check[i])
-                notificationManager.sendNotification(food: check[i], leftTime: text[i], hour: hour)
-            }
         }
     }
     
