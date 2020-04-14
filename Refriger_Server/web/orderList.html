@@ -2,18 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-sacale=1.0">
         <link rel="stylesheet" href="style.css">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
         <title> 안녕, 나의 냉장고 </title>
-        <script>
-          const firebase = require("firebase");
-        
-          var loginStatus = false;
 
+        <script>
+          var loginStatus = false;
+    
           function setLoginStatus() {
             var queryString = location.search.substring(1);
             if (queryString === "true") {
@@ -21,11 +19,11 @@
             } else {
                 loginStatus = false;
             }
-
+    
             if (loginStatus) { document.getElementById('login').textContent = "로그아웃"; }
             else { document.getElementById('login').textContent = "로그인"; }
           }
-
+    
           function actLoginState() {
             if (loginStatus) {
               var result = confirm("로그아웃 하시겠습니까?");
@@ -36,44 +34,22 @@
             location.href = "login.html";
             }
           }
-
-          function main() {
-            if (loginStatus) {
-              location.href = "index.html?true"
-            } else {
-              location.href = "index.html?false"
-            }
-          }
-
+    
           window.onload = function() {
               setLoginStatus();
-
-              require("firebase/firestore");
-
-              firebase.initializeApp({
-                apiKey: 'AIzaSyBwXDbapXQsdyIja4Yh092VyL-SllQptGA',
-                authDomain: 'refriger-a735b.web.app',
-                projectId: 'refriger-a735b'
-              });
-
-              db.collection("Orders").get().then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                  console.log('${doc.id} => ${doc.data()}');
-                });
-              });
           }
-
-            $(document).ready(function(){
+    
+          $(document).ready(function(){
               $('#icon').click(function(){
                 $('ul').toggleClass('show')
               })
-            })
-          </script>
+          })
+        </script>
     </head>
 
     <body>
         <nav>
-            <a class="logo" onclick="main()"> Refriger </a>
+            <a class="logo" href="index.html?true"> Refriger </a>
             <ul>
                 <li> <a class="category" href="orderList.html?true">주문 내역</a></li>
                 <li> <a class="category" href="ended.html?true">구매 완료 내역</a></li>
@@ -88,4 +64,5 @@
           </nav>
 
     </body>
+    
 </html>

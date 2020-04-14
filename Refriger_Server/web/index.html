@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+    
     <script>
       var loginStatus = false;
-
+  
       function setLoginStatus() {
         var queryString = location.search.substring(1);
         if (queryString === "true") {
@@ -17,11 +18,11 @@
         } else {
           loginStatus = false
         }
-
+  
         if (loginStatus) { document.getElementById('login').textContent = "로그아웃"; }
         else { document.getElementById('login').textContent = "로그인"; }
       }
-
+  
       function actLoginState() {
         if (loginStatus) {
           var result = confirm("로그아웃 하시겠습니까?");
@@ -32,7 +33,7 @@
           location.href = "login.html";
         }
       }
-
+  
       function main() {
         if (loginStatus) {
           location.href = "index.html?true"
@@ -40,7 +41,7 @@
           location.href = "index.html?false"
         }
       }
-
+  
       function orderList() {
         if (loginStatus) {
           location.href = "orderList.html?true";
@@ -51,7 +52,7 @@
           }
         }
       }
-
+  
       function completeList() {
         if (loginStatus) {
           location.href = "ended.html?true";
@@ -62,7 +63,7 @@
           }
         }
       }
-
+  
       function introSite() {
         if (loginStatus) {
           location.href = "introSite.html?true"
@@ -70,7 +71,7 @@
           location.href = "introSite.html?false"
         }
       }
-
+  
       function introEditor() {
         if (loginStatus) {
           location.href = "introEditor.html?true"
@@ -78,11 +79,11 @@
           location.href = "introEditor.html?false"
         }
       }
-
+  
       window.onload = function() {
         setLoginStatus();
       }
-
+  
       $(document).ready(function(){
         $('#icon').click(function(){
           $('ul').toggleClass('show')
@@ -116,4 +117,9 @@
     </div>
 
   </body>
+
+  <footer>
+    테스트
+  </footer>
+
 </html>
