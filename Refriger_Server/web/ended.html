@@ -6,51 +6,7 @@
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
         <title> 안녕, 나의 냉장고 </title>
-        
-        <script>
-            var loginStatus = false
-    
-            function setLoginStatus() {
-            var queryString = location.search.substring(1);
-            if (queryString === "true") {
-                loginStatus = true
-            } else {
-                loginStatus = false
-            }
-    
-            if (loginStatus) { document.getElementById('login').textContent = "로그아웃"; }
-            else { document.getElementById('login').textContent = "로그인"; }
-            }
-    
-            function actLoginState() {
-                if (loginStatus) {
-                    var result = confirm("로그아웃 하시겠습니까?");
-                    if (result) {
-                        location.href = "index.html";
-                    }
-                } else {
-                location.href = "login.html";
-                }
-            }
-    
-            function main() {
-                if (loginStatus) {
-                location.href = "index.html?true"
-                } else {
-                location.href = "index.html?false"
-                }
-            }
-    
-            window.onload = function() {
-                setLoginStatus();
-            }
-    
-            $(document).ready(function(){
-                $('#icon').click(function(){
-                $('ul').toggleClass('show')
-                })
-            })
-        </script>
+        <script src="./jsFolder/getLogin.js"></script>
     </head>
 
     <body>
