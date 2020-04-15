@@ -149,3 +149,32 @@ p.text {
     0% {opacity: 0;}
     100% {opacity: 1;}
  }
+
+div.OrderList_div {
+    color: white;
+    padding-top: 100px;
+    padding-left: 5%;
+    padding-right: 10%;
+}
+
+div.OrderList_div h1 {
+    font-size: 40px;
+}
+
+div.OrderList_div table{
+    margin-top: 15px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+div.OrderList_div td, th {
+    padding: 12px;
+    border: 1px solid gray;
+}
+
+div.OrderList_div th {
+    background-color: #173f5f;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+}

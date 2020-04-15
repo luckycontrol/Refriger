@@ -5,11 +5,7 @@
         <link rel="stylesheet" href="style.css">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
-        <script src="/__/firebase/7.14.0/firebase-app.js"></script>
-        <script src="/__/firebase/init.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
-        <script src="./jsFolder/getLogin.js"> </script>
+        <script src="./jsFolder/getLogin.js"></script>
         <title> 안녕, 나의 냉장고 </title>
     </head>
 
@@ -27,7 +23,28 @@
             <label id="icon">
               <i class="fas fa-bars"></i>
             </label>
-          </nav>
+        </nav>
+
+        <div class="OrderList_div">
+            <h1> 주문내역 </h1>
+            <table id="OrderList">
+                <tr>
+                    <th>수신자명</th>
+                    <th>주문날짜</th>
+                    <th>배송지</th>
+                    <th>주문 리스트</th>
+                    <th>휴대폰 번호</th>
+                    <th>QR 코드</th>
+                </tr>
+            </table>
+        </div>
+
+        <script src="/__/firebase/7.14.0/firebase-app.js"></script>
+        <script src="/__/firebase/7.14.0/firebase-analytics.js"></script>
+        <script src="/__/firebase/init.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+        <script src="./jsFolder/getOrderList.js"></script>
 
     </body>
     
