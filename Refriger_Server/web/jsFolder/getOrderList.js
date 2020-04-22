@@ -28,17 +28,26 @@ db.collection("Orders").get().then((querySnapshot) => {
             names.push(name[i]);
             dates.push(date[i]);
             addresses.push(address[i]);
-            foodNames.push(foodName[i]);
+            foodNames.push(foodName[i].split("|"));
             foodCounts.push(foodCount[i]);
             hps.push(hp[i]);
         }
     });
+
     for(var i=0; i<names.length; i++) {
         var row = table.insertRow(1);
+        var f = foodNames[i][0] + "<br>";
+
+        if(foodNames[i].length > 1) {
+            for(var j=1; j<foodNames[i].length; j++) {
+                f += foodNames[i][j] + "<br>";
+            }
+        }
+
         row.insertCell(0).innerHTML = names[i];
         row.insertCell(1).innerHTML = dates[i];
         row.insertCell(2).innerHTML = addresses[i];
-        row.insertCell(3).innerHTML = foodNames[i];
+        row.insertCell(3).innerHTML = f;
         row.insertCell(4).innerHTML = hps[i];
         row.insertCell(5).innerHTML = "qr코드";
 
