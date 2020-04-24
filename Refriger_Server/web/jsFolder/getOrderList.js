@@ -35,9 +35,10 @@ db.collection("Orders").get().then((querySnapshot) => {
     });
 
     for(var i=0; i<names.length; i++) {
-        var row = table.insertRow(1);
-        var f = foodNames[i][0] + "<br>";
-
+        let row = table.insertRow(1);
+        let f = foodNames[i][0] + "<br>";
+        let qr_div_id = "qr_div" + i;
+        
         if(foodNames[i].length > 1) {
             for(var j=1; j<foodNames[i].length; j++) {
                 f += foodNames[i][j] + "<br>";
@@ -49,7 +50,8 @@ db.collection("Orders").get().then((querySnapshot) => {
         row.insertCell(2).innerHTML = addresses[i];
         row.insertCell(3).innerHTML = f;
         row.insertCell(4).innerHTML = hps[i];
-        row.insertCell(5).innerHTML = "qr코드";
+        row.insertCell(5).innerHTML = '<div id="'+qr_div_id+'">';
+        makeCode(i, qr_div_id)
 
         var done = document.createElement('button');
         done.innerHTML = "준비완료";
@@ -62,3 +64,21 @@ db.collection("Orders").get().then((querySnapshot) => {
         row.insertCell(7).appendChild(refund);
     }
 });
+
+function makeCode(index, id) {
+    let qr_foodNames = "";
+
+    for(let i=0; i<foodNames[index].length; i++) {
+        qr_foodNames += foodNames[index][i] + ",";
+    }
+    qr_foodNames = qr_foodNames.slice(0, qr_foodNames.length - 1);
+
+    let qrcode = new QRCode(id, {
+        text: qr_foodNames,
+        width: 128,
+        height: 128,
+        colorDark: "#120136",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+}
