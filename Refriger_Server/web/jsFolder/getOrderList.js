@@ -38,6 +38,8 @@ db.collection("Orders").get().then((querySnapshot) => {
         let row = table.insertRow(1);
         let f = foodNames[i][0] + "<br>";
         let qr_div_id = "qr_div" + i;
+        let ready_btn = "ready_btn" + i;
+        let refund_btn = "refund_btn" + i;
         
         if(foodNames[i].length > 1) {
             for(var j=1; j<foodNames[i].length; j++) {
@@ -51,16 +53,24 @@ db.collection("Orders").get().then((querySnapshot) => {
         row.insertCell(3).innerHTML = f;
         row.insertCell(4).innerHTML = hps[i];
         row.insertCell(5).innerHTML = '<div id="'+qr_div_id+'">';
-        makeCode(i, qr_div_id)
+
+        makeCode(i, qr_div_id);
 
         var done = document.createElement('button');
         done.innerHTML = "준비완료";
-        done.setAttribute("class", "Order_ready");
+        done.setAttribute("id", ready_btn);
+        done.addEventListener("click", () => {
+            names.splice(i, 1);
+            alert(names.length);
+        })
         row.insertCell(6).appendChild(done);
 
         var refund = document.createElement('button');
         refund.innerHTML = "환불";
-        refund.setAttribute("class", "Order_refund");
+        refund.setAttribute("id", refund_btn);
+        refund.addEventListener("click", () => {
+
+        })
         row.insertCell(7).appendChild(refund);
     }
 });
@@ -73,7 +83,7 @@ function makeCode(index, id) {
     }
     qr_foodNames = qr_foodNames.slice(0, qr_foodNames.length - 1);
 
-    let qrcode = new QRCode(id, {
+    new QRCode(id, {
         text: qr_foodNames,
         width: 128,
         height: 128,

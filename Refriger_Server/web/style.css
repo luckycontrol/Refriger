@@ -15,6 +15,8 @@ nav {
     height: 80px;
     width: 100%;
     background: #34495e;
+    position: sticky;
+    top: 0;
 }
 
 a.logo {
@@ -162,7 +164,7 @@ div.OrderList_div h1 {
 }
 
 div.OrderList_div table{
-    margin-top: 15px;
+    margin-top: 25px;
     border-collapse: collapse;
     width: 100%;
 }
@@ -170,15 +172,28 @@ div.OrderList_div table{
 div.OrderList_div td, th {
     padding: 12px;
     border: 1px solid gray;
+    text-align: center;
 }
 
 div.OrderList_div th {
     background-color: #173f5f;
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: center;
 }
 
 button.Order_done {
     background-color: black;
 }
+
+.Order_ready {
+    background: transparent;
+    border: none;
+    color: white;
+    width: 50px;
+    height: 25px;
+}
+
+.Order_ready:hover {
+    background-color: rgb(51, 107, 107);
+}
+
