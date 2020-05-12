@@ -7,17 +7,16 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="./jsFolder/getLogin.js"></script>
   </head>
 
   <body>
     <nav>
-      <a class="logo" onclick="main()"> Refriger </a>
+      <a class="logo" href="index.html"> Refriger </a>
       <ul>
         <li> <a class="category" onclick="orderList()">주문 내역</a></li>
         <li> <a class="category" onclick="completeList()">구매 완료 내역</a></li>
-        <li> <a class="category" onclick="introSite()">사이트 소개</a></li>
-        <li> <a class="category" onclick="introEditor()">제작자 소개</a></li>
+        <li> <a class="category" href="introSite.html">사이트 소개</a></li>
+        <li> <a class="category" href="introEditor.html">제작자 소개</a></li>
         <li> <a class="category" id="login" onclick="actLoginState()"></a></li>
       </ul>
 
@@ -34,6 +33,11 @@
       </p>
     </div>
 
+    <script src="/__/firebase/7.12.0/firebase-app.js"></script>
+    <script src="/__/firebase/7.12.0/firebase-auth.js"></script>
+    <script src="/__/firebase/7.12.0/firebase-firestore.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script src="./jsFolder/getLogin.js"></script>
   </body>
 
 </html>

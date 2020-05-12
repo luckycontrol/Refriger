@@ -13,7 +13,8 @@ function signIn() {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(function(firebaseUser) {
-        loginSuccess(firebaseUser);
+        loginStatus = true;
+        location.href = 'index.html';
       })
       .catch(function(error) {
         var errCode = error.code;
@@ -28,7 +29,7 @@ function signIn() {
       })
   }
 
-  function loginSuccess(firebaseUser) {
+  function loginSuccess() {
     location.href="/index.html?true";
   }
 

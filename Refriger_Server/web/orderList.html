@@ -5,19 +5,18 @@
         <link rel="stylesheet" href="style.css">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
-        <script src="./jsFolder/getLogin.js"></script>
         <script src='./jsFolder/qrcode.js'></script>
         <title> 안녕, 나의 냉장고 </title>
     </head>
 
     <body>
         <nav>
-            <a class="logo" href="index.html?true"> Refriger </a>
+            <a class="logo" href="index.html"> Refriger </a>
             <ul>
-                <li> <a class="category" href="orderList.html?true">주문 내역</a></li>
-                <li> <a class="category" href="ended.html?true">구매 완료 내역</a></li>
-                <li> <a class="category" href="introSite.html?true">사이트 소개</a></li>
-                <li> <a class="category" href="introEditor.html?true">제작자 소개</a></li>
+                <li> <a class="category" href="orderList.html">주문 내역</a></li>
+                <li> <a class="category" href="ended.html">구매 완료 내역</a></li>
+                <li> <a class="category" href="introSite.html">사이트 소개</a></li>
+                <li> <a class="category" href="introEditor.html">제작자 소개</a></li>
                 <li> <a class="category" id="login" onclick="actLoginState()"></a></li>
             </ul>
       
@@ -43,11 +42,13 @@
         </div>
 
         <script src="/__/firebase/7.14.0/firebase-app.js"></script>
+        <script src="/__/firebase/7.12.0/firebase-auth.js"></script>
         <script src="/__/firebase/7.14.0/firebase-analytics.js"></script>
         <script src="/__/firebase/init.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
         <script src="./jsFolder/getOrderList.js"></script>
+        <script src="./jsFolder/getLogin.js"></script>
     </body>
     
 </html>
