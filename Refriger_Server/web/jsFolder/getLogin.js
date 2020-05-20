@@ -1,26 +1,24 @@
 var loginStatus = false; 
   
-function setLoginStatus() {
-    firebase.auth().onAuthStateChanged(function(user) {
-        if(user) {
-            loginStatus = true
-            document.getElementById('login').textContent = "로그아웃";
-        } else {
-            document.getElementById('login').textContent = "로그인";
-        }
-    })
-}
+firebase.auth().onAuthStateChanged((user) => {
+    if(user) {
+        loginStatus = true
+        document.getElementById('login').textContent = "로그아웃";
+    } else {
+        document.getElementById('login').textContent = "로그인";
+    }
+})
   
 function actLoginState() {
     if (loginStatus) {
         var result = confirm("로그아웃 하시겠습니까?");
         if (result) {
-            firebase.auth().signOut()
-            .then(function() {
-                loginStatus = false
-            }, function(error) {
+            firebase.auth().signOut().then(() => {
+                window.location.href='index.html';
+            }, (error) => {
                 console.error('Sign Out Error', error);
             });
+            
         }
     } else {
         location.href = "login.html";
@@ -47,10 +45,6 @@ function completeList() {
             location.href = "login.html";
         }
     }
-}
-  
-window.onload = function() {
-    setLoginStatus();
 }
   
 $(document).ready(function(){

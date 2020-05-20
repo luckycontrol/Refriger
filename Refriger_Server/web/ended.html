@@ -12,8 +12,8 @@
         <nav>
             <a class="logo" href="index.html"> Refriger </a>
             <ul>
-                <li> <a class="category" href="orderList.html">주문 내역</a></li>
-                <li> <a class="category" href="ended.html">구매 완료 내역</a></li>
+                <li> <a class="category" onclick="orderList()">주문 내역</a></li>
+                <li> <a class="category" onclick="completeList()">구매 완료 내역</a></li>
                 <li> <a class="category" href="introSite.html">사이트 소개</a></li>
                 <li> <a class="category" href="introEditor.html">제작자 소개</a></li>
                 <li> <a class="category" id="login" onclick="actLoginState()"></a></li>
@@ -24,12 +24,10 @@
             </label>
           </nav>
 
-          <script src="/__/firebase/7.14.0/firebase-app.js"></script>
-          <script src="/__/firebase/7.14.0/firebase-analytics.js"></script>
+          <script src="/__/firebase/7.12.0/firebase-app.js"></script>
+          <script src="/__/firebase/7.12.0/firebase-auth.js"></script>
+          <script src="/__/firebase/7.12.0/firebase-firestore.js"></script>
           <script src="/__/firebase/init.js"></script>
-          <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
-          <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
-          <script src="./jsFolder/getOrderList.js"></script>
           <script src="./jsFolder/getLogin.js"></script>
     </body>
 

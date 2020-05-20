@@ -29,18 +29,6 @@ function signIn() {
       })
   }
 
-  function loginSuccess() {
-    location.href="/index.html?true";
-  }
-
-  function orderList() {
-    alert("권한이 없습니다. 로그인을 먼저 해주세요.");
-  }
-
-  function completeList() {
-    alert("권한이 없습니다. 로그인을 먼저 해주세요.");
-  } 
-
   $(document).ready(function(){
       $('#icon').click(function(){
         $('ul').toggleClass('show')
