@@ -7,7 +7,6 @@ var names = []
 var dates = []
 var addresses = []
 var foodNames = []
-var foodCounts = []
 var hps = []
 
 
@@ -20,7 +19,6 @@ db.collection("Orders").get().then((querySnapshot) => {
         var date = doc.data()["OrderDate"].split("-");
         var address = doc.data()["Address"].split("-");
         var foodName = doc.data()["foodNames"].split("-");
-        var foodCount = doc.data()["foodCounts"].split("-");
         var hp = doc.data()["HP"].split("-");
 
         for(var i=0; i<name.length; i++) {
@@ -29,7 +27,6 @@ db.collection("Orders").get().then((querySnapshot) => {
             dates.push(date[i]);
             addresses.push(address[i]);
             foodNames.push(foodName[i].split("|"));
-            foodCounts.push(foodCount[i]);
             hps.push(hp[i]);
         }
     });

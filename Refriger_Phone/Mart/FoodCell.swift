@@ -19,7 +19,7 @@ struct FoodCell: View {
         ForEach(food) { r in
             VStack {
                     
-                NavigationLink(destination: FoodInfo(viewDatas: self.viewDatas, name: r.foodName, image: r.image, price: r.price)) {
+                NavigationLink(destination: FoodInfo(viewDatas: self.viewDatas, name: r.foodName, category: r.foodCategory, image: r.image, price: r.price)) {
                         
                     VStack(alignment: .leading) {
                             

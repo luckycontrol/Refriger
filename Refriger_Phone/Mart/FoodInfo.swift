@@ -15,15 +15,17 @@ struct FoodInfo: View {
     @ObservedObject var viewDatas: ViewDatas
     let name: String
     let image: String
+    let foodCategory: String
     @State var price: String = ""
     let productPrice: String
     
     @State var alert: Bool = false
     @State var activeAlert: String = "addAlert"
 
-    init(viewDatas: ViewDatas, name: String, image: String, price: String) {
+    init(viewDatas: ViewDatas, name: String, category: String, image: String, price: String) {
         self.viewDatas = viewDatas
         self.name = name
+        self.foodCategory = category
         self.image = image
         self._price = State<String>(initialValue: price)
         self.productPrice = price
@@ -113,18 +115,6 @@ struct FoodInfo: View {
             HStack {
                 
                 AddCartButton(viewDatas: viewDatas, alert: $alert, activeAlert: $activeAlert, foodName: name, foodCount: String(count), foodPrice: price)
-
-                ZStack {
-                    RoundedRectangle(cornerRadius: 5)
-                        .foregroundColor(.white)
-                        .frame(width: 150, height: 50)
-                        .shadow(color: .gray, radius: 2, x: 1, y: 1)
-                        .shadow(color: .white, radius: 2, x: -1, y: -1)
-                    
-                    NavigationLink(destination: SelectList(viewDatas: viewDatas)) {
-                        Text("구매하기")
-                    }
-                }
                 
             }
             .padding(.horizontal, 10)
@@ -180,10 +170,14 @@ struct AddCartButton: View {
     let foodName: String
     let foodCount: String
     let foodPrice: String
+    // let foodType: String
+    // var foodExpiration: String = ""
     
     @State var foodNames: [String]! = []
     @State var foodCounts: [String]! = []
     @State var foodPrices: [String]! = []
+    @State var foodTypes: [String]! = []
+    @State var foodExpirations: [String]! = []
     
     let db = Firestore.firestore().collection("users")
     
@@ -192,7 +186,7 @@ struct AddCartButton: View {
         Group {
             if self.viewDatas.login {
                 Button(action: {
-                    self.getSelectList { (foodNames, foodCounts, foodPrices, getData) in
+                    self.getSelectList { (foodNames, foodCounts, foodPrices, foodTypes, foodExpirations, getData) in
                         if getData {
                             if self.checkDuplicate(foodNames: foodNames) {
                                 self.alert.toggle()
@@ -208,7 +202,7 @@ struct AddCartButton: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 5)
                             .foregroundColor(.white)
-                            .frame(width: 150, height: 50)
+                            .frame(width: UIScreen.main.bounds.width - 50, height: 50)
                             .shadow(color: .gray, radius: 2, x: 1, y: 1)
                             .shadow(color: .white, radius: 2, x: -1, y: -1)
                         
@@ -219,7 +213,7 @@ struct AddCartButton: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 5)
                         .foregroundColor(.white)
-                        .frame(width: 150, height: 50)
+                        .frame(width: UIScreen.main.bounds.width - 50, height: 50)
                         .shadow(color: .gray, radius: 2, x: 1, y: 1)
                         .shadow(color: .white, radius: 2, x: -1, y: -1)
                     
@@ -231,19 +225,23 @@ struct AddCartButton: View {
         }
     }
     
-    func getSelectList(completion: @escaping ([String], [String], [String], Bool) -> Void) {
+    func getSelectList(completion: @escaping ([String], [String], [String], [String], [String], Bool) -> Void) {
         db.document(self.viewDatas.email).getDocument{ (document, error) in
             self.foodNames = String(describing: document!.data()!["foodName"]!).components(separatedBy: "|")
             self.foodCounts = String(describing: document!.data()!["foodCount"]!).components(separatedBy: "|")
             self.foodPrices = String(describing: document!.data()!["foodPrice"]!).components(separatedBy: "|")
+            self.foodTypes = String(describing: document!.data()!["foodType"]!).components(separatedBy: "|")
+            self.foodExpirations = String(describing: document!.data()!["foodExpiration"]!).components(separatedBy: "|")
             
             if self.foodNames[0] == "" {
                 self.foodNames = []
                 self.foodCounts = []
                 self.foodPrices = []
+                self.foodTypes = []
+                self.foodExpirations = []
             }
             
-            completion(self.foodNames, self.foodCounts, self.foodPrices, true)
+            completion(self.foodNames, self.foodCounts, self.foodPrices, self.foodTypes, self.foodExpirations, true)
         }
     }
     
@@ -261,11 +259,16 @@ struct AddCartButton: View {
         self.foodNames.append(foodName)
         self.foodCounts.append(foodCount)
         self.foodPrices.append(foodPrice)
+        // self.foodTypes.append(foodType)
+        // self.foodExpirations.append(foodExpiration)
         
         db.document(self.viewDatas.email).setData([
             "foodName" : foodNames.joined(separator: "|"),
             "foodCount" : foodCounts.joined(separator: "|"),
             "foodPrice" : foodPrices.joined(separator: "|"),
+            // "foodType" : foodTypes.joined(separator: "|"),
+            // "foodExpiration" : foodExpirations.joined(separator: "|")
+            
         ], merge: true)
         
     }

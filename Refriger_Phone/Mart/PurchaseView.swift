@@ -217,28 +217,28 @@ struct PurchaseView: View {
         foodCounts.removeLast()
         
         // 기존에 주문한 내역 가져옴
-        getOrdered { (orderedNames, orderedFoodNames, orderedFoodCounts, orderedTotalPrice, orderDate, orderAddress, getData, isData) in
+        getOrdered { (orderedNames, orderedFoodNames, orderedHP, orderDate, orderAddress, foodType, getData, isData) in
             if getData {
                 // 사용자가 이전에 구매를 한 내역이 있는 경우
                 if isData {
+                    
                     self.db.collection("Orders").document(self.viewDatas.email).setData([
                         "name" : orderedNames + "-" + self.name,
                         "foodNames" : orderedFoodNames + "-" + foodNames,
-                        "foodCounts" : orderedFoodCounts + "-" + foodCounts,
-                        "foodPrices" : orderedTotalPrice + "-" + self.totalPrice,
-                        "HP" : self.HP,
-                        "Address" : orderAddress + "-" + self.address,
+                        "HP" : orderedHP + "-" + self.HP,
+                        "Address" : orderAddress + "|" + self.address,
                         "OrderDate" : orderDate + "-" + formatter.string(from: Date())
+                        
                     ])
                 // 첫 구매인 경우
                 } else {
                     self.db.collection("Orders").document(self.viewDatas.email).setData([
                         "name" : self.viewDatas.name,
                         "foodNames" : foodNames,
-                        "foodCounts" : foodCounts,
-                        "foodPrices" : self.totalPrice,
+                        "HP" : orderedHP + "-" + self.HP,
                         "OrderDate" : formatter.string(from: Date()),
-                        "Address" : self.address
+                        "Address" : self.address,
+                        
                     ])
                 }
                 // 사용자 장바구니 초기화
@@ -247,7 +247,8 @@ struct PurchaseView: View {
                     "foodCount" : "",
                     "foodPrice" : "",
                     "HP" : self.HP,
-                    "address" : self.address
+                    "address" : self.address,
+                    "foodType" : ""
                 ], merge: true)
             }
         }
@@ -261,14 +262,14 @@ struct PurchaseView: View {
             if let document = document, document.exists {
                 let orderedNames = String(describing: document.data()!["name"]!)
                 let orderedFoodNames = String(describing: document.data()!["foodNames"]!)
-                let orderedFoodCounts = String(describing: document.data()!["foodCounts"]!)
-                let orderedFoodPrices = String(describing: document.data()!["foodPrices"]!)
                 let orderDate = String(describing: document.data()!["OrderDate"]!)
                 let orderAddress = String(describing: document.data()!["Address"]!)
+                let orderedHP = String(describing: document.data()!["HP"]!)
+                let foodType = String(describing: document.data()!["foodType"]!)
                 
-                completion(orderedNames, orderedFoodNames, orderedFoodCounts, orderedFoodPrices, orderDate, orderAddress, true, true)
+                completion(orderedNames, orderedFoodNames, orderedHP, orderDate, orderAddress, foodType, true, true)
             } else {
-                completion("" ,"", "", "", "", "", true, false)
+                completion("", "", "", "", "", "", true, false)
             }
         }
     }

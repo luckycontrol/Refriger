@@ -11,10 +11,12 @@ import SwiftUI
 import SwiftUI
 import CoreData
 import CodeScanner
+import Firebase
+import FirebaseFirestoreSwift
 
 struct RefrigerList: View {
     
-    @State var qrcode: Bool = false
+    @State private var qrcode: Bool = false
     
     @State var show: Bool = false
     
@@ -24,9 +26,15 @@ struct RefrigerList: View {
     
     @State var p: CGSize = .zero
     
+    let db = Firestore.firestore().collection("Orders")
+    
     @FetchRequest(entity: Food.entity(),
                   sortDescriptors: [NSSortDescriptor(keyPath: \Food.expiration, ascending: false)]
     ) var foodDatas: FetchedResults<Food>
+    
+    @Environment(\.managedObjectContext) var context
+    
+    @State var qr_txt: String = ""
         
     var body: some View {
         
@@ -35,7 +43,7 @@ struct RefrigerList: View {
             ZStack {
                 
                 Color("MartBackground")
-                Text("")
+                Text(qr_txt)
                 
                 ShowAllFoods(filter: $filter, delete: $delete)
                 
@@ -68,7 +76,7 @@ struct RefrigerList: View {
             .navigationBarTitle("식자재 목록", displayMode: .inline)
         }
         .sheet(isPresented: $qrcode) {
-            CodeScannerView(codeTypes: [.qr], simulatedData: "테스트용", completion: self.handleScan)
+            CodeScannerView(codeTypes: [.qr], simulatedData: "테스트용/1", completion: self.handleScan)
         }
     }
     
@@ -78,9 +86,31 @@ struct RefrigerList: View {
         switch result {
             
             case .success(let code):
-                let details = code.components(separatedBy: "\n")
-                print(details)
-            
+                let details = code.components(separatedBy: "/")
+                db.document(details[0]).getDocument { (document, error) in
+                    let foodNames = String(describing: document!.data()!["foodNames"]!).components(separatedBy: "-")
+                    
+                    let foodList = foodNames[Int(details[1])! - 1].components(separatedBy: "|")
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                    let date = dateFormatter.date(from: "2020-06-04")
+                    
+                    for foodName in foodList {
+                        let newFood = Food(context: self.context)
+                        newFood.id = UUID()
+                        newFood.foodName = String(foodName)
+                        newFood.expiration = date
+                        newFood.foodType = "과일"
+                        
+                        do { try self.context.save() } catch { print(error) }
+                    }
+                    
+                    //self.qr_txt = foodNames[Int(details[1])! - 3]
+                    
+                    //let newFood = Food(context: self.context)
+                    // let expiration
+                }
                 
             case .failure(let error):
                 print(error)

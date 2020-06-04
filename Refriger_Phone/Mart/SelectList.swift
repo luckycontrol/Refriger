@@ -118,13 +118,17 @@ struct SelectList: View {
             let foodNames = String(describing: document!.data()!["foodName"]!).components(separatedBy: "|")
             let foodCounts = String(describing: document!.data()!["foodCount"]!).components(separatedBy: "|")
             let foodPrices = String(describing: document!.data()!["foodPrice"]!).components(separatedBy: "|")
+            let foodType = String(describing: document!.data()!["foodType"]!).components(separatedBy: "|")
+            let foodExpiration = String(describing: document!.data()!["foodExpiration"]!).components(separatedBy: "|")
             
             for i in 0 ..< foodNames.count {
                 self.Select.selectedList.append(
                     SelectedType(
                         foodName: foodNames[i],
                         foodCount: foodCounts[i],
-                        foodPrice: foodPrices[i]
+                        foodPrice: foodPrices[i],
+                        foodType: foodType[i],
+                        foodExpiration: foodExpiration[i]
                     )
                 )
             }
@@ -166,6 +170,9 @@ struct SelectList: View {
         var foodNames: String = ""
         var foodCounts: String = ""
         var foodPrices: String = ""
+        var foodTypes: String = ""
+        var foodExpirations: String = ""
+        
         for i in 0 ..< Select.selectedList.count {
             if Select.selectedList[i].foodName == name {
                 Select.selectedList.remove(at: i)
@@ -177,12 +184,16 @@ struct SelectList: View {
             foodNames = foodNames + "|" + Select.selectedList[i].foodName
             foodCounts = foodCounts + "|" + Select.selectedList[i].foodCount
             foodPrices = foodPrices + "|" + Select.selectedList[i].foodPrice
+            foodTypes = foodTypes + "|" + Select.selectedList[i].foodType
+            foodExpirations = foodExpirations + "|" + Select.selectedList[i].foodExpiration
         }
         
         db.collection("users").document(viewDatas.email).setData([
             "foodName" : foodNames,
             "foodCount" : foodCounts,
             "foodPrice" : foodPrices,
+            "foodType": foodTypes,
+            "foodExpiration" : foodExpirations
         ], merge: true)
     }
 }
@@ -205,8 +216,10 @@ class SelectedList: ObservableObject{
 }
 
 struct SelectedType: Identifiable {
-    var id = UUID()
-    var foodName: String
-    var foodCount: String
-    var foodPrice: String
+    let id = UUID()
+    let foodName: String
+    let foodCount: String
+    let foodPrice: String
+    let foodType: String
+    let foodExpiration: String
 }
