@@ -164,6 +164,8 @@ struct PurchaseView: View {
             let foodNames = String(describing: document!.data()!["foodName"]!).components(separatedBy: "|")
             let foodCounts = String(describing: document!.data()!["foodCount"]!).components(separatedBy: "|")
             let foodPrices = String(describing: document!.data()!["foodPrice"]!).components(separatedBy: "|")
+            let foodTypes = String(describing: document!.data()!["foodType"]!).components(separatedBy: "|")
+            let foodExpirations = String(describing: document!.data()!["foodExpiration"]!).components(separatedBy: "|")
             self.HP = String(describing: document!.data()!["HP"]!)
             self.address = String(describing: document!.data()!["address"]!)
             
@@ -172,7 +174,9 @@ struct PurchaseView: View {
                     SelectedType(
                         foodName: foodNames[i],
                         foodCount: foodCounts[i],
-                        foodPrice: foodPrices[i]
+                        foodPrice: foodPrices[i],
+                        foodType: foodTypes[i],
+                        foodExpiration: foodExpirations[i]
                     )
                 )
             }
@@ -205,6 +209,8 @@ struct PurchaseView: View {
         // 새로 구입할 음식이름, 갯수
         var foodNames: String = ""
         var foodCounts: String = ""
+        var foodTypes: String = ""
+        var foodExpirations: String = ""
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy.MM.dd"
@@ -212,12 +218,16 @@ struct PurchaseView: View {
         for i in Select.selectedList {
             foodNames += i.foodName + "|"
             foodCounts += i.foodCount + "|"
+            foodTypes += i.foodType + "|"
+            foodExpirations += i.foodExpiration + "|"
         }
         foodNames.removeLast()
         foodCounts.removeLast()
+        foodTypes.removeLast()
+        foodExpirations.removeLast()
         
         // 기존에 주문한 내역 가져옴
-        getOrdered { (orderedNames, orderedFoodNames, orderedHP, orderDate, orderAddress, foodType, getData, isData) in
+        getOrdered { (orderedNames, orderedFoodNames, orderedHP, orderDate, orderAddress, orderedFoodTypes, orderedFoodExpirations, getData, isData) in
             if getData {
                 // 사용자가 이전에 구매를 한 내역이 있는 경우
                 if isData {
@@ -227,8 +237,9 @@ struct PurchaseView: View {
                         "foodNames" : orderedFoodNames + "-" + foodNames,
                         "HP" : orderedHP + "-" + self.HP,
                         "Address" : orderAddress + "|" + self.address,
-                        "OrderDate" : orderDate + "-" + formatter.string(from: Date())
-                        
+                        "OrderDate" : orderDate + "-" + formatter.string(from: Date()),
+                        "foodTypes" : orderedFoodTypes + "-" + foodTypes,
+                        "foodExpirations" : orderedFoodExpirations + "/" + foodExpirations
                     ])
                 // 첫 구매인 경우
                 } else {
@@ -238,7 +249,8 @@ struct PurchaseView: View {
                         "HP" : orderedHP + "-" + self.HP,
                         "OrderDate" : formatter.string(from: Date()),
                         "Address" : self.address,
-                        
+                        "foodTypes" : foodTypes,
+                        "foodExpirations" : foodExpirations
                     ])
                 }
                 // 사용자 장바구니 초기화
@@ -248,7 +260,8 @@ struct PurchaseView: View {
                     "foodPrice" : "",
                     "HP" : self.HP,
                     "address" : self.address,
-                    "foodType" : ""
+                    "foodType" : "",
+                    "foodExpiration" : ""
                 ], merge: true)
             }
         }
@@ -257,7 +270,7 @@ struct PurchaseView: View {
     }
     
     // 사용자의 구매내역을 가져온다. + Orders에 doc이 있는지 확인
-    func getOrdered(completion: @escaping (String, String, String, String, String, String, Bool, Bool) -> Void) {
+    func getOrdered(completion: @escaping (String, String, String, String, String, String, String, Bool, Bool) -> Void) {
         db.collection("Orders").document(viewDatas.email).getDocument { (document, error) in
             if let document = document, document.exists {
                 let orderedNames = String(describing: document.data()!["name"]!)
@@ -265,11 +278,12 @@ struct PurchaseView: View {
                 let orderDate = String(describing: document.data()!["OrderDate"]!)
                 let orderAddress = String(describing: document.data()!["Address"]!)
                 let orderedHP = String(describing: document.data()!["HP"]!)
-                let foodType = String(describing: document.data()!["foodType"]!)
+                let orderedFoodTypes = String(describing: document.data()!["foodTypes"]!)
+                let orderedFoodExpirations = String(describing: document.data()!["foodExpirations"]!)
                 
-                completion(orderedNames, orderedFoodNames, orderedHP, orderDate, orderAddress, foodType, true, true)
+                completion(orderedNames, orderedFoodNames, orderedHP, orderDate, orderAddress, orderedFoodTypes, orderedFoodExpirations, true, true)
             } else {
-                completion("", "", "", "", "", "", true, false)
+                completion("", "", "", "", "", "", "", true, false)
             }
         }
     }

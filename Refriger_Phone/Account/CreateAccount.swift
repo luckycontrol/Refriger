@@ -86,6 +86,8 @@ struct CreateAccount: View {
                     "foodName" : "",
                     "foodCount" : "",
                     "foodPrice" : "",
+                    "foodType" : "",
+                    "foodExpiration" : ""
                 ])
                 
                 self.check = true

@@ -114,7 +114,7 @@ struct FoodInfo: View {
             
             HStack {
                 
-                AddCartButton(viewDatas: viewDatas, alert: $alert, activeAlert: $activeAlert, foodName: name, foodCount: String(count), foodPrice: price)
+                AddCartButton(viewDatas: viewDatas, alert: $alert, activeAlert: $activeAlert, foodName: name, foodCount: String(count), foodPrice: price, foodType: foodCategory)
                 
             }
             .padding(.horizontal, 10)
@@ -170,8 +170,7 @@ struct AddCartButton: View {
     let foodName: String
     let foodCount: String
     let foodPrice: String
-    // let foodType: String
-    // var foodExpiration: String = ""
+    let foodType: String
     
     @State var foodNames: [String]! = []
     @State var foodCounts: [String]! = []
@@ -259,18 +258,34 @@ struct AddCartButton: View {
         self.foodNames.append(foodName)
         self.foodCounts.append(foodCount)
         self.foodPrices.append(foodPrice)
-        // self.foodTypes.append(foodType)
-        // self.foodExpirations.append(foodExpiration)
+        self.foodTypes.append(foodType)
+        self.foodExpirations.append(retrnExpireDate(foodType: foodType))
         
         db.document(self.viewDatas.email).setData([
             "foodName" : foodNames.joined(separator: "|"),
             "foodCount" : foodCounts.joined(separator: "|"),
             "foodPrice" : foodPrices.joined(separator: "|"),
-            // "foodType" : foodTypes.joined(separator: "|"),
-            // "foodExpiration" : foodExpirations.joined(separator: "|")
+            "foodType" : foodTypes.joined(separator: "|"),
+            "foodExpiration" : foodExpirations.joined(separator: "|")
             
         ], merge: true)
+    }
+    
+    func retrnExpireDate(foodType: String) -> String {
+        let today = Date()
+        let expirationDate: Date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
+        if foodType == "육류" {
+            expirationDate = Calendar.current.date(byAdding: .day, value: 7, to: today)!
+        } else if foodType == "채소" {
+            expirationDate = Calendar.current.date(byAdding: .day, value: 5, to: today)!
+        } else {
+            expirationDate = Calendar.current.date(byAdding: .day, value: 4, to: today)!
+        }
+        
+        return dateFormatter.string(from: expirationDate)
     }
 }
 

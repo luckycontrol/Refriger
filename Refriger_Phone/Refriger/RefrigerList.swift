@@ -88,28 +88,31 @@ struct RefrigerList: View {
             case .success(let code):
                 let details = code.components(separatedBy: "/")
                 db.document(details[0]).getDocument { (document, error) in
-                    let foodNames = String(describing: document!.data()!["foodNames"]!).components(separatedBy: "-")
                     
-                    let foodList = foodNames[Int(details[1])! - 1].components(separatedBy: "|")
+                    var savedFoodList: [SavedFoodType] = []
+                    
+                    let foodNames = String(describing: document!.data()!["foodNames"]!).components(separatedBy: "-")[Int(details[1])! - 3].components(separatedBy: "|")
+                    
+                    let foodTypes = String(describing: document!.data()!["foodTypes"]!).components(separatedBy: "-")[Int(details[1])! - 3].components(separatedBy: "|")
+                    
+                    let foodExpirations = String(describing: document!.data()!["foodExpirations"]!).components(separatedBy: "/")[Int(details[1])! - 3].components(separatedBy: "|")
                     
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd"
-                    let date = dateFormatter.date(from: "2020-06-04")
                     
-                    for foodName in foodList {
+                    for i in 0 ..< foodNames.count {
+                        savedFoodList.append(SavedFoodType(foodName: foodNames[i], foodType: foodTypes[i], foodExpiration: dateFormatter.date(from: foodExpirations[i])!))
+                    }
+                    
+                    for food in savedFoodList {
                         let newFood = Food(context: self.context)
                         newFood.id = UUID()
-                        newFood.foodName = String(foodName)
-                        newFood.expiration = date
-                        newFood.foodType = "과일"
+                        newFood.foodName = food.foodName
+                        newFood.expiration = food.foodExpiration
+                        newFood.foodType = food.foodType
                         
                         do { try self.context.save() } catch { print(error) }
                     }
-                    
-                    //self.qr_txt = foodNames[Int(details[1])! - 3]
-                    
-                    //let newFood = Food(context: self.context)
-                    // let expiration
                 }
                 
             case .failure(let error):
@@ -312,4 +315,10 @@ struct Menu: View {
         .frame(width: 200)
         .background(Color.white)
     }
+}
+ 
+struct SavedFoodType {
+    var foodName: String
+    var foodType: String
+    var foodExpiration: Date
 }
