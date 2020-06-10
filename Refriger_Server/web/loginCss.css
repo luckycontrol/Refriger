@@ -1,5 +1,5 @@
 .loginBox {
-    color: white;
+    color: #dbc6eb;
     width: 280px;
     position: absolute;
     top: 50%;
@@ -39,7 +39,7 @@
     border: none;
     outline: none;
     background: none;
-    color: white;
+    color: black;
     font-size: 14px;
     width: 80%;
     float: left;
@@ -50,7 +50,7 @@
     width: 100%;
     background: none;
     border: 2px solid #6dd3ce;
-    color: white;
+    color: black;
     padding: 5px;
     font-size: 14px;
     cursor: pointer;
