@@ -7,14 +7,14 @@
 
 body {
     font-family: monospace;
-    background: url(images/bg1.jpeg) no-repeat;
+    background: url(images/bg2.jpg) no-repeat;
     background-size: cover;
 }
 
 nav {
     height: 80px;
     width: 100%;
-    background: #34495e;
+    background: #dbc6eb;
     position: sticky;
     top: 0;
 }
@@ -120,7 +120,7 @@ nav #icon {
 }
 
 div.introduce{
-    color: white;
+    color: black;
     padding-top: 150px;
     text-align: center;
     -webkit-animation-duration: 3s;
