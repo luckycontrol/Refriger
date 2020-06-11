@@ -2,14 +2,6 @@ var table = document.getElementById('OrderList');
 var db = firebase.firestore();
 var ordersRef = db.collection("Orders")
 
-var userAccounts = []
-var names = []
-var dates = []
-var addresses = []
-var foodNames = []
-var hps = []
-
-
 db.collection("Orders").get().then((querySnapshot) => {
 
     // firestore에서 데이터를 가져온다.
@@ -43,7 +35,10 @@ db.collection("Orders").get().then((querySnapshot) => {
 
             let done = document.createElement('button');
             done.innerHTML = "준비완료";
-            //done.setAttribute("id", ready_btn);
+            done.setAttribute("id", doc.id+'/'+i);
+            done.addEventListener("click", function() {
+                new Promise(setOrderList(this.id)).then(location.reload());
+            });
             row.insertCell(6).appendChild(done);
 
             let refund = document.createElement('button');
@@ -66,5 +61,53 @@ function makeCode(userAccount, index, qr_div_id) {
         colorDark: "#120136",
         colorLight: "#ffffff",
         correctLevel: QRCode.CorrectLevel.L
+    });
+}
+
+function setOrderList(email_index) {
+
+    ref = email_index.split('/');
+
+    db.collection('Orders').doc(ref[0]).get().then((doc) => {
+        if (doc.exists) {
+            let foodNames = doc.data()['foodNames'].split('-');
+            let foodExpirations = doc.data()['foodExpirations'].split('/');
+            let foodTypes = doc.data()['foodTypes'].split('-')
+            let address = doc.data()['Address'].split('|');
+            let hp = doc.data()['HP'].split('-');
+            let name = doc.data()['name'].split('-');
+            let orderDate = doc.data()['OrderDate'].split('-');
+
+            foodNames.splice(ref[1], 1);
+            foodExpirations.splice(ref[1], 1);
+            foodTypes.splice(ref[1], 1);
+            address.splice(ref[1], 1)
+            hp.splice(ref[1], 1);
+            name.splice(ref[1], 1);
+            orderDate.splice(ref[1], 1);
+
+            if (foodNames.length == 0) {
+                db.collection('Orders').doc(ref[0]).delete();
+                return;
+            }
+
+            foodNames = foodNames.join('-');
+            foodExpirations = foodExpirations.join('/');
+            foodTypes = foodTypes.join('-');
+            address = address.join('|');
+            hp = hp.join('-');
+            name = name.join('-');
+            orderDate.join('-');
+
+            db.collection('Orders').doc(ref[0]).set({
+                foodNames: foodNames.toString(),
+                foodExpirations: foodExpirations.toString(),
+                foodTypes: foodTypes.toString(),
+                Address: address.toString(),
+                HP: hp.toString(),
+                name: name.toString(),
+                OrderDate: orderDate.toString(),
+            });
+        }
     });
 }
