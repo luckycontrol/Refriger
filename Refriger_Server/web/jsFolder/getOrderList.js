@@ -37,7 +37,7 @@ db.collection("Orders").get().then((querySnapshot) => {
             done.innerHTML = "준비완료";
             done.setAttribute("id", doc.id+'/'+i);
             done.addEventListener("click", function() {
-                new Promise(setOrderList(this.id)).then(location.reload());
+                setOrderList(this.id);
             });
             row.insertCell(6).appendChild(done);
 
@@ -66,6 +66,7 @@ function makeCode(userAccount, index, qr_div_id) {
 
 function setOrderList(email_index) {
 
+    // ref 0 - 이메일, ref 1 - 인덱스
     ref = email_index.split('/');
 
     db.collection('Orders').doc(ref[0]).get().then((doc) => {
@@ -78,6 +79,7 @@ function setOrderList(email_index) {
             let name = doc.data()['name'].split('-');
             let orderDate = doc.data()['OrderDate'].split('-');
 
+            // 인덱스 부분 지우기
             foodNames.splice(ref[1], 1);
             foodExpirations.splice(ref[1], 1);
             foodTypes.splice(ref[1], 1);
@@ -86,11 +88,13 @@ function setOrderList(email_index) {
             name.splice(ref[1], 1);
             orderDate.splice(ref[1], 1);
 
+            // 문서에 남은 주문이 없다면 문서를 삭제
             if (foodNames.length == 0) {
                 db.collection('Orders').doc(ref[0]).delete();
                 return;
             }
 
+            // 남은 주문들을 연결
             foodNames = foodNames.join('-');
             foodExpirations = foodExpirations.join('/');
             foodTypes = foodTypes.join('-');
@@ -99,6 +103,7 @@ function setOrderList(email_index) {
             name = name.join('-');
             orderDate.join('-');
 
+            // 계정 문서에 변경된 주문내역을 저장 
             db.collection('Orders').doc(ref[0]).set({
                 foodNames: foodNames.toString(),
                 foodExpirations: foodExpirations.toString(),
@@ -106,7 +111,10 @@ function setOrderList(email_index) {
                 Address: address.toString(),
                 HP: hp.toString(),
                 name: name.toString(),
-                OrderDate: orderDate.toString(),
+                OrderDate: orderDate.toString()
+
+            }).then(() => {
+                location.reload();
             });
         }
     });
