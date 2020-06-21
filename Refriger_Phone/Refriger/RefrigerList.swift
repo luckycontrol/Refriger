@@ -91,11 +91,11 @@ struct RefrigerList: View {
                     
                     var savedFoodList: [SavedFoodType] = []
                     
-                    let foodNames = String(describing: document!.data()!["foodNames"]!).components(separatedBy: "-")[Int(details[1])! - 3].components(separatedBy: "|")
+                    let foodNames = String(describing: document!.data()!["foodNames"]!).components(separatedBy: "-")[Int(details[1])!].components(separatedBy: "|")
                     
-                    let foodTypes = String(describing: document!.data()!["foodTypes"]!).components(separatedBy: "-")[Int(details[1])! - 3].components(separatedBy: "|")
+                    let foodTypes = String(describing: document!.data()!["foodTypes"]!).components(separatedBy: "-")[Int(details[1])!].components(separatedBy: "|")
                     
-                    let foodExpirations = String(describing: document!.data()!["foodExpirations"]!).components(separatedBy: "/")[Int(details[1])! - 3].components(separatedBy: "|")
+                    let foodExpirations = String(describing: document!.data()!["foodExpirations"]!).components(separatedBy: "/")[Int(details[1])!].components(separatedBy: "|")
                     
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd"

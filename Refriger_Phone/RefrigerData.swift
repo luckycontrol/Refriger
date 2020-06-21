@@ -160,12 +160,12 @@ var meat = [
         id: 0,
         foodType: "소고기",
         row: [
-            row(id: 0, foodName: "[국내산] 소고기 국거리용 200g", foodCategory: "육류", image: "[국내산] 소고기 국거리용 200g", price: "7,700"),
-            row(id: 1, foodName: "[냉동] 설상목장 무항생제 한우 샤브샤브용 300g", foodCategory: "육류", image: "[냉동] 설상목장 무항생제 한우 샤브샤브용 300g", price: "12,460"),
-            row(id: 2, foodName: "국내산 소고기 육전용 200g", foodCategory: "육류", image: "국내산 소고기 육전용 200g", price: "8,220"),
-            row(id: 3, foodName: "[피코크] 한우 곰 탕 500g", foodCategory: "육류", image: "[피코크] 한우 곰 탕 500g", price: "3,180"),
-            row(id: 4, foodName: "[피코크] 한우사골육수 1kg", foodCategory: "육류", image: "[피코크] 한우사골육수 1kg", price: "5,980"),
-            row(id: 5, foodName: "횡성한우 불고기(팩) 100g", foodCategory: "육류", image: "횡성한우 불고기(팩) 100g", price: "6,900"),
+            row(id: 0, foodName: "[국내산] 소고기 국거리용 200g", foodCategory: "정육", image: "[국내산] 소고기 국거리용 200g", price: "7,700"),
+            row(id: 1, foodName: "[냉동] 설상목장 무항생제 한우 샤브샤브용 300g", foodCategory: "정육", image: "[냉동] 설상목장 무항생제 한우 샤브샤브용 300g", price: "12,460"),
+            row(id: 2, foodName: "국내산 소고기 육전용 200g", foodCategory: "정육", image: "국내산 소고기 육전용 200g", price: "8,220"),
+            row(id: 3, foodName: "[피코크] 한우 곰 탕 500g", foodCategory: "정육", image: "[피코크] 한우 곰 탕 500g", price: "3,180"),
+            row(id: 4, foodName: "[피코크] 한우사골육수 1kg", foodCategory: "정육", image: "[피코크] 한우사골육수 1kg", price: "5,980"),
+            row(id: 5, foodName: "횡성한우 불고기(팩) 100g", foodCategory: "정육", image: "횡성한우 불고기(팩) 100g", price: "6,900"),
         ]
     ),
     
@@ -173,12 +173,12 @@ var meat = [
         id: 1,
         foodType: "돼지고기",
         row: [
-            row(id: 0, foodName: "국내산 칼집 삼겹살 100g", foodCategory: "육류", image: "국내산 칼집 삼겹살 100g", price: "1,780"),
-            row(id: 1, foodName: "[설상목장] 무항생제 한돈 대패삼겹살300g", foodCategory: "육류", image: "[설상목장] 무항생제 한돈 대패삼겹살300g", price: "6,930"),
-            row(id: 2, foodName: "[더느림] 냉동 목심 구이용 400g", foodCategory: "육류", image: "[더느림] 냉동 목심 구이용 400g", price: "8,710"),
-            row(id: 3, foodName: "[해발500포크] 냉장등심다짐육용400g", foodCategory: "육류", image: "[해발500포크] 냉장등심다짐육용400g", price: "4,130"),
-            row(id: 4, foodName: "[김해축협] 한돈 삼겹살(구이용) 300g", foodCategory: "육류", image: "[김해축협] 한돈 삼겹살(구이용) 300g", price: "4,970"),
-            row(id: 5, foodName: "[더느림] 냉장 칼집구이용 미박 삼겹살 400g", foodCategory: "육류", image: "[더느림] 냉장 칼집구이용 미박 삼겹살 400g", price: "9,510"),
+            row(id: 0, foodName: "국내산 칼집 삼겹살 100g", foodCategory: "정육", image: "국내산 칼집 삼겹살 100g", price: "1,780"),
+            row(id: 1, foodName: "[설상목장] 무항생제 한돈 대패삼겹살300g", foodCategory: "정육", image: "[설상목장] 무항생제 한돈 대패삼겹살300g", price: "6,930"),
+            row(id: 2, foodName: "[더느림] 냉동 목심 구이용 400g", foodCategory: "정육", image: "[더느림] 냉동 목심 구이용 400g", price: "8,710"),
+            row(id: 3, foodName: "[해발500포크] 냉장등심다짐육용400g", foodCategory: "정육", image: "[해발500포크] 냉장등심다짐육용400g", price: "4,130"),
+            row(id: 4, foodName: "[김해축협] 한돈 삼겹살(구이용) 300g", foodCategory: "정육", image: "[김해축협] 한돈 삼겹살(구이용) 300g", price: "4,970"),
+            row(id: 5, foodName: "[더느림] 냉장 칼집구이용 미박 삼겹살 400g", foodCategory: "정육", image: "[더느림] 냉장 칼집구이용 미박 삼겹살 400g", price: "9,510"),
         ]
     ),
     
@@ -186,12 +186,12 @@ var meat = [
         id: 2,
         foodType: "닭 / 오리고기",
         row: [
-            row(id: 0, foodName: "[No Brand][노브랜드] 냉동 닭가슴살 1kg", foodCategory: "육류", image: "[No Brand][노브랜드] 냉동 닭가슴살 1kg", price: "5,980"),
-            row(id: 1, foodName: "훈제오리 특별기획(600g*2):", foodCategory: "육류", image: "훈제오리 특별기획(600g*2)", price: "11,980"),
-            row(id: 2, foodName: "[No Brand][노브랜드] 냉동 닭안심 1kg", foodCategory: "육류", image: "[No Brand][노브랜드] 냉동 닭안심 1kg", price: "5,980"),
-            row(id: 3, foodName: "[하림] 냉장 볶음탕용 생닭 (1kg)", foodCategory: "육류", image: "[하림] 냉장 볶음탕용 생닭 (1kg)", price: "4,980"),
-            row(id: 4, foodName: "★듀록 돼지고기 1kg 증정★소고기 배불특가 1.6kg", foodCategory: "육류", image: "★듀록 돼지고기 1kg 증정★소고기 배불특가 1.6kg", price: "39,600"),
-            row(id: 5, foodName: "하림 춘천식 닭갈비 매운맛 500g", foodCategory: "육류", image: "하림 춘천식 닭갈비 매운맛 500g", price: "6,380"),
+            row(id: 0, foodName: "[No Brand][노브랜드] 냉동 닭가슴살 1kg", foodCategory: "정육", image: "[No Brand][노브랜드] 냉동 닭가슴살 1kg", price: "5,980"),
+            row(id: 1, foodName: "훈제오리 특별기획(600g*2):", foodCategory: "정육", image: "훈제오리 특별기획(600g*2)", price: "11,980"),
+            row(id: 2, foodName: "[No Brand][노브랜드] 냉동 닭안심 1kg", foodCategory: "정육", image: "[No Brand][노브랜드] 냉동 닭안심 1kg", price: "5,980"),
+            row(id: 3, foodName: "[하림] 냉장 볶음탕용 생닭 (1kg)", foodCategory: "정육", image: "[하림] 냉장 볶음탕용 생닭 (1kg)", price: "4,980"),
+            row(id: 4, foodName: "★듀록 돼지고기 1kg 증정★소고기 배불특가 1.6kg", foodCategory: "정육", image: "★듀록 돼지고기 1kg 증정★소고기 배불특가 1.6kg", price: "39,600"),
+            row(id: 5, foodName: "하림 춘천식 닭갈비 매운맛 500g", foodCategory: "정육", image: "하림 춘천식 닭갈비 매운맛 500g", price: "6,380"),
         ]
     )
 ]

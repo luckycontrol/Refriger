@@ -246,7 +246,7 @@ struct PurchaseView: View {
                     self.db.collection("Orders").document(self.viewDatas.email).setData([
                         "name" : self.viewDatas.name,
                         "foodNames" : foodNames,
-                        "HP" : orderedHP + "-" + self.HP,
+                        "HP" : self.HP,
                         "OrderDate" : formatter.string(from: Date()),
                         "Address" : self.address,
                         "foodTypes" : foodTypes,
