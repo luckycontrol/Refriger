@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="style.css?after">
+        <link rel="stylesheet" href="style.css?asdf">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
         <title> 안녕, 나의 냉장고 </title>
@@ -24,11 +24,26 @@
             </label>
           </nav>
 
+          <div class="delivered_div">
+              <h1> 구매완료 내역 </h1>
+              <table id='delivered'>
+                  <tr>
+                      <th>수신자명</th>
+                      <th>주문날짜</th>
+                      <th>배송지</th>
+                      <th>주문 리스트</th>
+                      <th>휴대폰 번호</th>
+                      <th>환불</th>
+                  </tr>
+              </table>
+          </div>
+
           <script src="/__/firebase/7.12.0/firebase-app.js"></script>
           <script src="/__/firebase/7.12.0/firebase-auth.js"></script>
           <script src="/__/firebase/7.12.0/firebase-firestore.js"></script>
           <script src="/__/firebase/init.js"></script>
           <script src="./jsFolder/getLogin.js"></script>
+          <script src="./jsFolder/delivered.js"></script>
     </body>
 
 </html>

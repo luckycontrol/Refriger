@@ -97,6 +97,14 @@ struct RefrigerList: View {
                     
                     let foodExpirations = String(describing: document!.data()!["foodExpirations"]!).components(separatedBy: "/")[Int(details[1])!].components(separatedBy: "|")
                     
+                    let name = String(describing: document!.data()!["name"]!).components(separatedBy: "-")[Int(details[1])!]
+                    
+                    let address = String(describing: document!.data()!["Address"]!).components(separatedBy: "|")[Int(details[1])!]
+                    
+                    let orderdate = String(describing: document!.data()!["OrderDate"]!).components(separatedBy: "-")[Int(details[1])!]
+                    
+                    let hp = String(describing: document!.data()!["HP"]!).components(separatedBy: "-")[Int(details[1])!]
+                    
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd"
                     

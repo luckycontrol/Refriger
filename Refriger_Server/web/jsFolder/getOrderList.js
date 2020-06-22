@@ -1,6 +1,5 @@
 var table = document.getElementById('OrderList');
 var db = firebase.firestore();
-var ordersRef = db.collection("Orders")
 
 db.collection("Orders").get().then((querySnapshot) => {
 
@@ -80,13 +79,13 @@ function setOrderList(email_index) {
             let orderDate = doc.data()['OrderDate'].split('-');
 
             // 인덱스 부분 지우기
-            foodNames.splice(ref[1], 1);
+            let delivered_food = foodNames.splice(ref[1], 1);
             foodExpirations.splice(ref[1], 1);
             foodTypes.splice(ref[1], 1);
-            address.splice(ref[1], 1)
-            hp.splice(ref[1], 1);
-            name.splice(ref[1], 1);
-            orderDate.splice(ref[1], 1);
+            let delivered_address = address.splice(ref[1], 1)
+            let delivered_hp = hp.splice(ref[1], 1);
+            let delivered_name = name.splice(ref[1], 1);
+            let delivered_orderdate = orderDate.splice(ref[1], 1);
 
             // 문서에 남은 주문이 없다면 문서를 삭제
             if (foodNames.length == 0) {
@@ -101,7 +100,7 @@ function setOrderList(email_index) {
             address = address.join('|');
             hp = hp.join('-');
             name = name.join('-');
-            orderDate.join('-');
+            orderDate = orderDate.join('-');
 
             // 계정 문서에 변경된 주문내역을 저장 
             db.collection('Orders').doc(ref[0]).set({
@@ -114,7 +113,40 @@ function setOrderList(email_index) {
                 OrderDate: orderDate.toString()
 
             }).then(() => {
-                location.reload();
+                // Delivered의 해당 독에서 주문을 가져와서 주문을 수정 후 저장
+                db.collection('Delivered').doc(ref[0]).get().then((doc) => {
+                    if (doc.exists) {
+                        // 문서가 있으면 주문을 가져와서 수정 후 저장
+                        let d_name = doc.data()['name'].split('-');
+                        let d_address = doc.data()['address'].split('|');
+                        let d_hp = doc.data()['hp'].split('-');
+                        let d_orderdate = doc.data()['orderdate'].split('-');
+                        let d_foodNames = doc.data()['foodNames'].split('-');
+
+                        d_name.push(delivered_name);
+                        d_address.push(delivered_address);
+                        d_hp.push(delivered_hp);
+                        d_orderdate.push(delivered_orderdate);
+                        d_foodNames.push(delivered_food);
+
+                        db.collection('Delivered').doc(ref[0]).set({
+                            name: d_name.join('-').toString(),
+                            address: d_address.join('|').toString(),
+                            hp: d_hp.join('-').toString(),
+                            orderdate: d_orderdate.join('-').toString(),
+                            foodNames: d_foodNames.join('-').toString()
+                        });
+                    } else {
+                        // 문서가 없으면 그냥 저장
+                        db.collection('Delivered').doc(ref[0]).set({
+                            name: delivered_name.toString(),
+                            address: delivered_address.toString(),
+                            hp: delivered_hp.toString(),
+                            orderdate: delivered_orderdate.toString(),
+                            foodNames: delivered_food.toString()
+                        });
+                    }
+                });
             });
         }
     });

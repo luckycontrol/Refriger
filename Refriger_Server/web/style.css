@@ -183,19 +183,34 @@ div.OrderList_div th {
     padding-bottom: 12px;
 }
 
-button.Order_done {
-    background-color: black;
+div.delivered_div {
+    color: black;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
-.Order_ready {
-    background: transparent;
-    border: none;
+div.delivered_div h1 {
+    font-size: 40px;
     color: white;
-    width: 50px;
-    height: 25px;
 }
 
-.Order_ready:hover {
-    background-color: rgb(51, 107, 107);
+div.delivered_div table {
+    margin-top: 40px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+div.delivered_div th, td {
+    padding: 12px;
+    border: 1px solid gray;
+    text-align: center;
+}
+
+div.delivered_div th {
+    background-color: #dbc6eb;
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 
