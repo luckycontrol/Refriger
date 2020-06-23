@@ -26,7 +26,7 @@ struct RefrigerList: View {
     
     @State var p: CGSize = .zero
     
-    let db = Firestore.firestore().collection("Orders")
+    let db = Firestore.firestore().collection("Delivered")
     
     @FetchRequest(entity: Food.entity(),
                   sortDescriptors: [NSSortDescriptor(keyPath: \Food.expiration, ascending: false)]
@@ -91,25 +91,29 @@ struct RefrigerList: View {
                     
                     var savedFoodList: [SavedFoodType] = []
                     
-                    let foodNames = String(describing: document!.data()!["foodNames"]!).components(separatedBy: "-")[Int(details[1])!].components(separatedBy: "|")
+                    var foodNames = String(describing: document!.data()!["foodNames"]!).components(separatedBy: "-")
                     
-                    let foodTypes = String(describing: document!.data()!["foodTypes"]!).components(separatedBy: "-")[Int(details[1])!].components(separatedBy: "|")
+                    var foodTypes = String(describing: document!.data()!["foodTypes"]!).components(separatedBy: "-")
                     
-                    let foodExpirations = String(describing: document!.data()!["foodExpirations"]!).components(separatedBy: "/")[Int(details[1])!].components(separatedBy: "|")
+                    var foodExpirations = String(describing: document!.data()!["foodExpirations"]!).components(separatedBy: "/")
                     
-                    let name = String(describing: document!.data()!["name"]!).components(separatedBy: "-")[Int(details[1])!]
+                    var name = String(describing: document!.data()!["name"]!).components(separatedBy: "-")
                     
-                    let address = String(describing: document!.data()!["Address"]!).components(separatedBy: "|")[Int(details[1])!]
+                    var address = String(describing: document!.data()!["address"]!).components(separatedBy: "|")
                     
-                    let orderdate = String(describing: document!.data()!["OrderDate"]!).components(separatedBy: "-")[Int(details[1])!]
+                    var orderdate = String(describing: document!.data()!["orderdate"]!).components(separatedBy: "-")
                     
-                    let hp = String(describing: document!.data()!["HP"]!).components(separatedBy: "-")[Int(details[1])!]
+                    var hp = String(describing: document!.data()!["hp"]!).components(separatedBy: "-")
+                    
+                    let save_foodName = foodNames[Int(details[1])!].components(separatedBy: "|")
+                    let save_foodType = foodTypes[Int(details[1])!].components(separatedBy: "|")
+                    let save_foodExpiration = foodExpirations[Int(details[1])!].components(separatedBy: "|")
                     
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd"
                     
-                    for i in 0 ..< foodNames.count {
-                        savedFoodList.append(SavedFoodType(foodName: foodNames[i], foodType: foodTypes[i], foodExpiration: dateFormatter.date(from: foodExpirations[i])!))
+                    for i in 0 ..< save_foodName.count {
+                        savedFoodList.append(SavedFoodType(foodName: save_foodName[i], foodType: save_foodType[i], foodExpiration: dateFormatter.date(from: save_foodExpiration[i])!))
                     }
                     
                     for food in savedFoodList {
@@ -121,6 +125,29 @@ struct RefrigerList: View {
                         
                         do { try self.context.save() } catch { print(error) }
                     }
+                    
+                    foodNames.remove(at: Int(details[1])!)
+                    foodTypes.remove(at: Int(details[1])!)
+                    foodExpirations.remove(at: Int(details[1])!)
+                    name.remove(at: Int(details[1])!)
+                    address.remove(at: Int(details[1])!)
+                    orderdate.remove(at: Int(details[1])!)
+                    hp.remove(at: Int(details[1])!)
+                    
+                    if foodNames.count >= 1 {
+                        self.db.document(details[0]).setData([
+                            "name": name.joined(separator: "-"),
+                            "address": address.joined(separator: "|"),
+                            "hp": hp.joined(separator: "-"),
+                            "orderdate": orderdate.joined(separator: "-"),
+                            "foodNames": foodNames.joined(separator: "-"),
+                            "foodTypes": foodTypes.joined(separator: "-"),
+                            "foodExpirations": foodExpirations.joined(separator: "/")
+                        ])
+                    } else {
+                        self.db.document(details[0]).delete()
+                    }
+                    
                 }
                 
             case .failure(let error):
